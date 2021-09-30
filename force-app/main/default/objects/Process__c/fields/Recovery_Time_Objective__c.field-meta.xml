@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recovery_Time_Objective__c</fullName>
+    <externalId>false</externalId>
+    <label>Recovery Time Objective</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>2 Hours</fullName>
+                <default>false</default>
+                <label>2 Hours</label>
+            </value>
+            <value>
+                <fullName>4 Hours</fullName>
+                <default>false</default>
+                <label>4 Hours</label>
+            </value>
+            <value>
+                <fullName>8 Hours</fullName>
+                <default>false</default>
+                <label>8 Hours</label>
+            </value>
+            <value>
+                <fullName>24 Hours</fullName>
+                <default>false</default>
+                <label>24 Hours</label>
+            </value>
+            <value>
+                <fullName>48 Hours</fullName>
+                <default>false</default>
+                <label>48 Hours</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

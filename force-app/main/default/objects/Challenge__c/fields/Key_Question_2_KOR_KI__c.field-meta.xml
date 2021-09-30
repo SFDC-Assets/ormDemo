@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Key_Question_2_KOR_KI__c</fullName>
+    <defaultValue>&quot;Was there consideration of underlying or supporting key operational risks in a prioritization process?&quot;</defaultValue>
+    <externalId>false</externalId>
+    <label>Key Question 2 (KOR-KI)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

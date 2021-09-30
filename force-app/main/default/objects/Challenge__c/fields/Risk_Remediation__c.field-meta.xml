@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Risk_Remediation__c</fullName>
+    <defaultValue>&quot;Business agreement to take actions recommended by risk management team?&quot;</defaultValue>
+    <externalId>false</externalId>
+    <label>Risk Remediation</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>TextArea</type>
+</CustomField>

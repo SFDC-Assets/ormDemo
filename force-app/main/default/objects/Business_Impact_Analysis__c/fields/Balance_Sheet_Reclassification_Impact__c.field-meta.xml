@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Balance_Sheet_Reclassification_Impact__c</fullName>
+    <externalId>false</externalId>
+    <label>Balance Sheet Reclassification Impact</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Less than $500MM</fullName>
+                <default>false</default>
+                <label>Less than $500MM</label>
+            </value>
+            <value>
+                <fullName>$500MM to &lt;$3B</fullName>
+                <default>false</default>
+                <label>$500MM to less than $3B</label>
+            </value>
+            <value>
+                <fullName>$3B to &lt;$5B</fullName>
+                <default>false</default>
+                <label>$3B to less than $5B</label>
+            </value>
+            <value>
+                <fullName>$5B to &lt;$30B</fullName>
+                <default>false</default>
+                <label>$5B to less than $30B</label>
+            </value>
+            <value>
+                <fullName>&gt;=$30B</fullName>
+                <default>false</default>
+                <label>Greater than or equal to $30B</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionCalls>
+        <name>Refresh_Screen</name>
+        <label>Refresh Screen</label>
+        <locationX>670</locationX>
+        <locationY>487</locationY>
+        <actionName>c:UpdateScreen</actionName>
+        <actionType>component</actionType>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>v_processID</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <name>Determine_Tiers</name>
+        <label>Determine Tiers</label>
+        <locationX>478</locationX>
+        <locationY>189</locationY>
+        <defaultConnector>
+            <targetReference>Tier_3_Results</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Tier 3</defaultConnectorLabel>
+        <rules>
+            <name>Tier_1</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Economic</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Lessthan250K</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Economic</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>$250Ktolessthan$1MM</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Economic</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>$1MMtolessthan$5MM</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Economic</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>$$5MM to &lt;$10MM</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Tier_1_Results</targetReference>
+            </connector>
+            <label>Tier 1</label>
+        </rules>
+    </decisions>
+    <dynamicChoiceSets>
+        <name>BalanchSheetPicklistChoiceSet</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Balance_Sheet_Reclassification_Impact__c</picklistField>
+        <picklistObject>Business_Impact_Analysis__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>EconomicPickListChoiceSet</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Economic_Impact__c</picklistField>
+        <picklistObject>Business_Impact_Analysis__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>PandLMistatementPicklistChoiceSet</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>P_L_Misstatement_Impact__c</picklistField>
+        <picklistObject>Business_Impact_Analysis__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>RegulatoryPicklistChoiceSet</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Regulatory_Impact__c</picklistField>
+        <picklistObject>Business_Impact_Analysis__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>ReputationPicklistChoiceSet</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Reputational_Impact__c</picklistField>
+        <picklistObject>Business_Impact_Analysis__c</picklistObject>
+    </dynamicChoiceSets>
+    <formulas>
+        <name>f_biaTier</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!EconomicPickListChoiceSet}, &quot;Less than 250K&quot;), &quot;Tier 1 - Aligned&quot;, &quot;Tier 3 - Aligned&quot;)</expression>
+    </formulas>
+    <formulas>
+        <name>Lessthan250k</name>
+        <dataType>String</dataType>
+        <expression>IF(
+{!Economic}=&quot;Less than $250K&quot;, &quot;Tier 1 - Aligned&quot;, &quot;Tier 3 - Aligned&quot;
+)</expression>
+    </formulas>
+    <interviewLabel>Business Impact Analysis (BIA) {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Business Impact Analysis (BIA)</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_BIA_on_Process</name>
+        <label>Create BIA on Process</label>
+        <locationX>484</locationX>
+        <locationY>347</locationY>
+        <connector>
+            <targetReference>Update_Process_Checkbox</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Balance_Sheet_Reclassification_Impact__c</field>
+            <value>
+                <elementReference>Balance_Sheet_Reclassification</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Economic_Impact__c</field>
+            <value>
+                <elementReference>Economic</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>P_L_Misstatement_Impact__c</field>
+            <value>
+                <elementReference>P_L_Mistatement</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Process__c</field>
+            <value>
+                <elementReference>v_processID</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Regulatory_Impact__c</field>
+            <value>
+                <elementReference>Regulatory</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Reputational_Impact__c</field>
+            <value>
+                <elementReference>Reputational</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Business_Impact_Analysis__c</object>
+    </recordCreates>
+    <recordUpdates>
+        <name>Update_Process_Checkbox</name>
+        <label>Update Process Checkbox</label>
+        <locationX>486</locationX>
+        <locationY>486</locationY>
+        <connector>
+            <targetReference>Refresh_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>v_processID</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>BIA_Created__c</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>Process__c</object>
+    </recordUpdates>
+    <screens>
+        <name>Business_Impact_Analysis</name>
+        <label>Business Impact Analysis</label>
+        <locationX>266</locationX>
+        <locationY>50</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Impact_Types</targetReference>
+        </connector>
+        <fields>
+            <name>welcomeInstructions</name>
+            <fieldText>&lt;p&gt;Use this Flow to add a Business Impact Analysis (BIA) to Process {!v_processName}.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Impact_Types</name>
+        <label>Impact Types</label>
+        <locationX>488</locationX>
+        <locationY>50</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Determine_Tiers</targetReference>
+        </connector>
+        <fields>
+            <name>SelectImpactTypes</name>
+            <fieldText>&lt;p&gt;Please select the appropriate value for the following impact types.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Economic</name>
+            <choiceReferences>EconomicPickListChoiceSet</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Economic</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Space1</name>
+            <fieldText>&lt;p&gt;     &lt;/p&gt;&lt;p&gt;     &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Regulatory</name>
+            <choiceReferences>RegulatoryPicklistChoiceSet</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Regulatory</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Space2</name>
+            <fieldText>&lt;p&gt;     &lt;/p&gt;&lt;p&gt;     &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Reputational</name>
+            <choiceReferences>ReputationPicklistChoiceSet</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Reputational</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>space3</name>
+            <fieldText>&lt;p&gt;     &lt;/p&gt;&lt;p&gt;     &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>P_L_Mistatement</name>
+            <choiceReferences>PandLMistatementPicklistChoiceSet</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>P&amp;L Mistatement</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>space4</name>
+            <fieldText>&lt;p&gt;     &lt;/p&gt;&lt;p&gt;     &lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Balance_Sheet_Reclassification</name>
+            <choiceReferences>BalanchSheetPicklistChoiceSet</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Balance Sheet Reclassification</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Tier_1_Results</name>
+        <label>BIA Results</label>
+        <locationX>259</locationX>
+        <locationY>276</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Create_BIA_on_Process</targetReference>
+        </connector>
+        <fields>
+            <name>Tier1ResultsDisplayText</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;BIA Impact Results&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;BIA Tier: &lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Tier 1 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;FCP Tier:&lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; Tier 2 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;Front Office Aligned Tier:&lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; NA&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;Overall Functional Group Tier:&lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; Tier 1 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;&lt;i&gt;If you would like to adjust the impact analysis, click the Previous button.  Otherwise click Next to Save the results.&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Tier_3_Results</name>
+        <label>BIA Results</label>
+        <locationX>717</locationX>
+        <locationY>271</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Create_BIA_on_Process</targetReference>
+        </connector>
+        <fields>
+            <name>Tier3DisplayResults</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;&lt;u&gt;BIA Impact Results&lt;/u&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;BIA Tier: &lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Tier 3 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;FCP Tier:&lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; Tier 2 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;Front Office Aligned Tier:&lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; Tier 3 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px;&quot;&gt;Overall Functional Group Tier:&lt;/b&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt; Tier 3 - Aligned&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 12px; background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;&lt;i&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;If you would like to adjust the impact analysis, click the Previous button.  Otherwise click Next to Save the results.&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Business_Impact_Analysis</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>v_biaID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>v_BIATier</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>v_FCPTier</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>v_OverallTier</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>v_processID</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>v_processName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

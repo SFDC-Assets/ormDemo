@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>KOR_KI_Challenge</fullName>
+    <active>true</active>
+    <compactLayoutAssignment>Challenge_Compact_Layout</compactLayoutAssignment>
+    <label>Operational Risk</label>
+    <picklistValues>
+        <picklist>Challenge_Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Response under review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Challenge_Type__c</picklist>
+        <values>
+            <fullName>Ad hoc</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cycled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Event_Source__c</picklist>
+        <values>
+            <fullName>External</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Internal</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Legal_Consultation__c</picklist>
+        <values>
+            <fullName>Before commencement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Before publication</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Both</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reporting_Period__c</picklist>
+        <values>
+            <fullName>1Q 2015</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2016</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2017</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2018</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2020</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2021</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2022</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1Q 2023</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2015</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2016</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2017</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2018</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2020</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2021</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2022</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2Q 2023</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2015</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2016</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2017</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2018</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2020</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2021</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2022</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3Q 2023</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2015</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2016</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2017</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2018</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2019</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2020</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2021</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2022</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4Q 2023</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_KOR_KI_Question_1__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_KOR_KI_Question_2__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_KOR_KI_Question_3__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_KOR_KI_Question_4__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_KOR_KI_Question_5__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_Lessons_Learned_Question_1__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_Lessons_Learned_Question_2__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_Lessons_Learned_Question_3__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_Lessons_Learned_Question_4__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Response_to_Lessons_Learned_Question_5__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Risk_Acceptance_y_n__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Risk_Remediation_y_n__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

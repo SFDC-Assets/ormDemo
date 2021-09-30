@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reporting_Period__c</fullName>
+    <externalId>false</externalId>
+    <label>Reporting Period</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1Q 2015</fullName>
+                <default>false</default>
+                <label>1Q 2015</label>
+            </value>
+            <value>
+                <fullName>2Q 2015</fullName>
+                <default>false</default>
+                <label>2Q 2015</label>
+            </value>
+            <value>
+                <fullName>3Q 2015</fullName>
+                <default>false</default>
+                <label>3Q 2015</label>
+            </value>
+            <value>
+                <fullName>4Q 2015</fullName>
+                <default>false</default>
+                <label>4Q 2015</label>
+            </value>
+            <value>
+                <fullName>1Q 2016</fullName>
+                <default>false</default>
+                <label>1Q 2016</label>
+            </value>
+            <value>
+                <fullName>2Q 2016</fullName>
+                <default>false</default>
+                <label>2Q 2016</label>
+            </value>
+            <value>
+                <fullName>3Q 2016</fullName>
+                <default>false</default>
+                <label>3Q 2016</label>
+            </value>
+            <value>
+                <fullName>4Q 2016</fullName>
+                <default>false</default>
+                <label>4Q 2016</label>
+            </value>
+            <value>
+                <fullName>1Q 2017</fullName>
+                <default>false</default>
+                <label>1Q 2017</label>
+            </value>
+            <value>
+                <fullName>2Q 2017</fullName>
+                <default>false</default>
+                <label>2Q 2017</label>
+            </value>
+            <value>
+                <fullName>3Q 2017</fullName>
+                <default>false</default>
+                <label>3Q 2017</label>
+            </value>
+            <value>
+                <fullName>4Q 2017</fullName>
+                <default>false</default>
+                <label>4Q 2017</label>
+            </value>
+            <value>
+                <fullName>1Q 2018</fullName>
+                <default>false</default>
+                <label>1Q 2018</label>
+            </value>
+            <value>
+                <fullName>2Q 2018</fullName>
+                <default>false</default>
+                <label>2Q 2018</label>
+            </value>
+            <value>
+                <fullName>3Q 2018</fullName>
+                <default>false</default>
+                <label>3Q 2018</label>
+            </value>
+            <value>
+                <fullName>4Q 2018</fullName>
+                <default>false</default>
+                <label>4Q 2018</label>
+            </value>
+            <value>
+                <fullName>1Q 2019</fullName>
+                <default>false</default>
+                <label>1Q 2019</label>
+            </value>
+            <value>
+                <fullName>2Q 2019</fullName>
+                <default>false</default>
+                <label>2Q 2019</label>
+            </value>
+            <value>
+                <fullName>3Q 2019</fullName>
+                <default>false</default>
+                <label>3Q 2019</label>
+            </value>
+            <value>
+                <fullName>4Q 2019</fullName>
+                <default>false</default>
+                <label>4Q 2019</label>
+            </value>
+            <value>
+                <fullName>1Q 2020</fullName>
+                <default>false</default>
+                <label>1Q 2020</label>
+            </value>
+            <value>
+                <fullName>2Q 2020</fullName>
+                <default>false</default>
+                <label>2Q 2020</label>
+            </value>
+            <value>
+                <fullName>3Q 2020</fullName>
+                <default>false</default>
+                <label>3Q 2020</label>
+            </value>
+            <value>
+                <fullName>4Q 2020</fullName>
+                <default>false</default>
+                <label>4Q 2020</label>
+            </value>
+            <value>
+                <fullName>1Q 2021</fullName>
+                <default>false</default>
+                <label>1Q 2021</label>
+            </value>
+            <value>
+                <fullName>2Q 2021</fullName>
+                <default>false</default>
+                <label>2Q 2021</label>
+            </value>
+            <value>
+                <fullName>3Q 2021</fullName>
+                <default>false</default>
+                <label>3Q 2021</label>
+            </value>
+            <value>
+                <fullName>4Q 2021</fullName>
+                <default>false</default>
+                <label>4Q 2021</label>
+            </value>
+            <value>
+                <fullName>1Q 2022</fullName>
+                <default>false</default>
+                <label>1Q 2022</label>
+            </value>
+            <value>
+                <fullName>2Q 2022</fullName>
+                <default>false</default>
+                <label>2Q 2022</label>
+            </value>
+            <value>
+                <fullName>3Q 2022</fullName>
+                <default>false</default>
+                <label>3Q 2022</label>
+            </value>
+            <value>
+                <fullName>4Q 2022</fullName>
+                <default>false</default>
+                <label>4Q 2022</label>
+            </value>
+            <value>
+                <fullName>1Q 2023</fullName>
+                <default>false</default>
+                <label>1Q 2023</label>
+            </value>
+            <value>
+                <fullName>2Q 2023</fullName>
+                <default>false</default>
+                <label>2Q 2023</label>
+            </value>
+            <value>
+                <fullName>3Q 2023</fullName>
+                <default>false</default>
+                <label>3Q 2023</label>
+            </value>
+            <value>
+                <fullName>4Q 2023</fullName>
+                <default>false</default>
+                <label>4Q 2023</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

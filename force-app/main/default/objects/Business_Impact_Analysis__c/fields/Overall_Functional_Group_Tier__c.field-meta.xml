@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overall_Functional_Group_Tier__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Economic_Impact__c, &quot;Lessthan250K&quot;) || ISPICKVAL(Economic_Impact__c, &quot;$250Ktolessthan$1MM&quot;) || ISPICKVAL(Economic_Impact__c, &quot;$1MMtolessthan$5MM&quot;) || ISPICKVAL(Economic_Impact__c, &quot;$$5MM to &lt;$10MM&quot;), &quot;Tier 1 - Aligned&quot;, &quot;Tier 3 - Aligned&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Overall Functional Group Tier</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

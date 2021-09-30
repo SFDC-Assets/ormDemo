@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Regulatory_Impact__c</fullName>
+    <externalId>false</externalId>
+    <label>Regulatory Impact</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Do not anticipate regulatory findings or disciplinary action.</fullName>
+                <default>false</default>
+                <label>Do not anticipate regulatory findings or disciplinary action.</label>
+            </value>
+            <value>
+                <fullName>Possible regulatory issues calling for corrective actions, but do not anticipate material fines or regulatory sanctions against the Firm.</fullName>
+                <default>false</default>
+                <label>Possible regulatory issues calling for corrective actions, but do not anticipate material fines or regulatory sanctions against the Firm.</label>
+            </value>
+            <value>
+                <fullName>Probable regulatory enforcement or contentious action, including possible sanctions against a specific business activity, product, entity, or region of the Firm.</fullName>
+                <default>false</default>
+                <label>Probable regulatory enforcement or contentious action, including possible sanctions against a specific business activity, product, entity, or region of the Firm.</label>
+            </value>
+            <value>
+                <fullName>Notable regulatory enforcement or contentious action, including probable sanctions against the Firm or its Material Entities.</fullName>
+                <default>false</default>
+                <label>Notable regulatory enforcement or contentious action, including probable sanctions against the Firm or its Material Entities.</label>
+            </value>
+            <value>
+                <fullName>Significant regulatory enforcement / contentious action, including probable sanctions against the Firm or its Material Entities.</fullName>
+                <default>false</default>
+                <label>Significant regulatory enforcement / contentious action, including probable sanctions against the Firm or its Material Entities.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

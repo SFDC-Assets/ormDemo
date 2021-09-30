@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>P_L_Misstatement_Impact__c</fullName>
+    <externalId>false</externalId>
+    <label>P&amp;L Misstatement Impact</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Less than $15MM</fullName>
+                <default>false</default>
+                <label>Less than $15MM</label>
+            </value>
+            <value>
+                <fullName>$15MM to &lt;$30MM</fullName>
+                <default>false</default>
+                <label>$15MM to less than $30MM</label>
+            </value>
+            <value>
+                <fullName>$30MM to &lt;$50MM</fullName>
+                <default>false</default>
+                <label>$30MM to less than $50MM</label>
+            </value>
+            <value>
+                <fullName>$50MM to &lt;$200MM</fullName>
+                <default>false</default>
+                <label>$50MM to less than $200MM</label>
+            </value>
+            <value>
+                <fullName>$200MM to &lt;$500MM</fullName>
+                <default>false</default>
+                <label>$200MM to less than $500MM</label>
+            </value>
+            <value>
+                <fullName>Greater than or equal to $500MM</fullName>
+                <default>false</default>
+                <label>Greater than or equal to $500MM</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

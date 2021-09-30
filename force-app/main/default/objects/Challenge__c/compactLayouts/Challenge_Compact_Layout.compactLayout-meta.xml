@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Challenge_Compact_Layout</fullName>
+    <fields>Challenge_Title__c</fields>
+    <fields>Name</fields>
+    <fields>Challenge_Status__c</fields>
+    <fields>Challenge_Entity__c</fields>
+    <fields>RecordTypeId</fields>
+    <fields>Challenge_Type__c</fields>
+    <fields>Challenge_Entity_Primary_Contact__c</fields>
+    <label>Challenge Compact Layout</label>
+</CompactLayout>

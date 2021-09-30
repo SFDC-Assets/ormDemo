@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Challenge_Type__c</fullName>
+    <defaultValue>IF($RecordType.DeveloperName = &quot;Lessons_Learned&quot;, &quot;Ad hoc&quot;, &quot;&quot;)</defaultValue>
+    <externalId>false</externalId>
+    <label>Sub Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cycled</fullName>
+                <default>false</default>
+                <label>Cycled</label>
+            </value>
+            <value>
+                <fullName>Ad hoc</fullName>
+                <default>false</default>
+                <label>Ad hoc</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
