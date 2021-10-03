@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <actionCalls>
-        <name>Refresh_Screen</name>
-        <label>Refresh Screen</label>
-        <locationX>670</locationX>
-        <locationY>487</locationY>
-        <actionName>c:UpdateScreen</actionName>
-        <actionType>component</actionType>
-        <inputParameters>
-            <name>recordId</name>
-            <value>
-                <elementReference>v_processID</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
     <apiVersion>49.0</apiVersion>
     <decisions>
         <name>Determine_Tiers</name>
         <label>Determine Tiers</label>
-        <locationX>478</locationX>
+        <locationX>602</locationX>
         <locationY>189</locationY>
         <defaultConnector>
             <targetReference>Tier_3_Results</targetReference>
@@ -122,6 +108,12 @@
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -131,7 +123,7 @@
     <recordCreates>
         <name>Create_BIA_on_Process</name>
         <label>Create BIA on Process</label>
-        <locationX>484</locationX>
+        <locationX>608</locationX>
         <locationY>347</locationY>
         <connector>
             <targetReference>Update_Process_Checkbox</targetReference>
@@ -177,11 +169,8 @@
     <recordUpdates>
         <name>Update_Process_Checkbox</name>
         <label>Update Process Checkbox</label>
-        <locationX>486</locationX>
+        <locationX>610</locationX>
         <locationY>486</locationY>
-        <connector>
-            <targetReference>Refresh_Screen</targetReference>
-        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -201,7 +190,7 @@
     <screens>
         <name>Business_Impact_Analysis</name>
         <label>Business Impact Analysis</label>
-        <locationX>266</locationX>
+        <locationX>390</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -220,7 +209,7 @@
     <screens>
         <name>Impact_Types</name>
         <label>Impact Types</label>
-        <locationX>488</locationX>
+        <locationX>612</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -299,7 +288,7 @@
     <screens>
         <name>Tier_1_Results</name>
         <label>BIA Results</label>
-        <locationX>259</locationX>
+        <locationX>383</locationX>
         <locationY>276</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -318,7 +307,7 @@
     <screens>
         <name>Tier_3_Results</name>
         <label>BIA Results</label>
-        <locationX>717</locationX>
+        <locationX>841</locationX>
         <locationY>271</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
@@ -334,7 +323,13 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <startElementReference>Business_Impact_Analysis</startElementReference>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Business_Impact_Analysis</targetReference>
+        </connector>
+    </start>
     <status>Active</status>
     <variables>
         <name>v_biaID</name>

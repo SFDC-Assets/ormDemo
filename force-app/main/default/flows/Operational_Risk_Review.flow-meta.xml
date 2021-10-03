@@ -1,89 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <actionCalls>
-        <name>Redirect_to_Record</name>
-        <label>Redirect to Record</label>
-        <locationX>575</locationX>
-        <locationY>2820</locationY>
-        <actionName>c:loadWebPage</actionName>
-        <actionType>component</actionType>
-        <inputParameters>
-            <name>url</name>
-            <value>
-                <stringValue>https://ormclean.lightning.force.com/lightning/r/Challenge__c/{!vChallengeRecordID}/view</stringValue>
-            </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>vRecordURL</assignToReference>
-            <name>url</name>
-        </outputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>Submit_for_Challenge_Approval</name>
-        <label>Submit for Challenge Approval</label>
-        <locationX>840</locationX>
-        <locationY>2645</locationY>
-        <actionName>submit</actionName>
-        <actionType>submit</actionType>
-        <connector>
-            <targetReference>Toast_Sent_for_Approval</targetReference>
-        </connector>
-        <inputParameters>
-            <name>objectId</name>
-            <value>
-                <elementReference>vChallengeRecordID</elementReference>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>processDefinitionNameOrId</name>
-            <value>
-                <stringValue>ORM_Challenge_Approval</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>submitterId</name>
-            <value>
-                <stringValue>0051U000003DY2h</stringValue>
-            </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>vApprovalID</assignToReference>
-            <name>instanceId</name>
-        </outputParameters>
-    </actionCalls>
-    <actionCalls>
-        <name>Toast_Sent_for_Approval</name>
-        <label>Toast Sent for Approval</label>
-        <locationX>841</locationX>
-        <locationY>2818</locationY>
-        <actionName>c:showToast</actionName>
-        <actionType>component</actionType>
-        <connector>
-            <targetReference>Redirect_to_Record</targetReference>
-        </connector>
-        <inputParameters>
-            <name>type</name>
-            <value>
-                <stringValue>Success</stringValue>
-            </value>
-        </inputParameters>
-        <inputParameters>
-            <name>message</name>
-            <value>
-                <stringValue>Your Operational Risk Review has been sent for approval.</stringValue>
-            </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>vToastApprovalProcess</assignToReference>
-            <name>type</name>
-        </outputParameters>
-    </actionCalls>
-    <apiVersion>49.0</apiVersion>
+    <apiVersion>52.0</apiVersion>
     <assignments>
         <name>Set_KOR_KI_Record_Type</name>
         <label>Set KOR-KI Record Type</label>
         <locationX>896</locationX>
-        <locationY>495</locationY>
+        <locationY>717</locationY>
         <assignmentItems>
             <assignToReference>vRecordType</assignToReference>
             <operator>Assign</operator>
@@ -99,7 +21,7 @@
         <name>Set_LL_Record_Type</name>
         <label>Set LL Record Type</label>
         <locationX>197</locationX>
-        <locationY>494</locationY>
+        <locationY>716</locationY>
         <assignmentItems>
             <assignToReference>vRecordType</assignToReference>
             <operator>Assign</operator>
@@ -111,6 +33,14 @@
             <targetReference>Entity_Information</targetReference>
         </connector>
     </assignments>
+    <choices>
+        <name>cExternal</name>
+        <choiceText>External</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>External</stringValue>
+        </value>
+    </choices>
     <choices>
         <name>Ch_CorrectEntity_No</name>
         <choiceText>No</choiceText>
@@ -636,11 +566,19 @@
             <stringValue>2023</stringValue>
         </value>
     </choices>
+    <choices>
+        <name>cInternal</name>
+        <choiceText>Internal</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Internal</stringValue>
+        </value>
+    </choices>
     <decisions>
         <name>Check_Challenge_Record_Type</name>
         <label>Check Challenge Record Type</label>
         <locationX>542</locationX>
-        <locationY>295</locationY>
+        <locationY>517</locationY>
         <defaultConnector>
             <targetReference>Lessons_Learned_Specific_Details</targetReference>
         </defaultConnector>
@@ -665,7 +603,7 @@
         <name>Check_Challenge_Record_Type_2</name>
         <label>Check Challenge Record Type 2</label>
         <locationX>548</locationX>
-        <locationY>1156</locationY>
+        <locationY>1378</locationY>
         <defaultConnector>
             <targetReference>LL_Specific_Key_Questions_1</targetReference>
         </defaultConnector>
@@ -690,7 +628,7 @@
         <name>Decision_for_Entity</name>
         <label>Decision for Entity</label>
         <locationX>744</locationX>
-        <locationY>724</locationY>
+        <locationY>946</locationY>
         <defaultConnector>
             <targetReference>Entity_Information</targetReference>
         </defaultConnector>
@@ -715,7 +653,7 @@
         <name>Decision_on_Completion</name>
         <label>Decision on Completion</label>
         <locationX>570</locationX>
-        <locationY>1977</locationY>
+        <locationY>2199</locationY>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
             <name>DecisionCompletion_Yes</name>
@@ -737,7 +675,7 @@
         <name>Decision_on_Record_Type</name>
         <label>Decision on Record Type</label>
         <locationX>572</locationX>
-        <locationY>2107</locationY>
+        <locationY>2329</locationY>
         <defaultConnector>
             <targetReference>Create_Challenge_Record</targetReference>
         </defaultConnector>
@@ -762,10 +700,7 @@
         <name>Decision_on_Submit</name>
         <label>Decision on Submit</label>
         <locationX>575</locationX>
-        <locationY>2643</locationY>
-        <defaultConnector>
-            <targetReference>Redirect_to_Record</targetReference>
-        </defaultConnector>
+        <locationY>2865</locationY>
         <defaultConnectorLabel>Keep as Draft</defaultConnectorLabel>
         <rules>
             <name>Decision_Submit_for_Approval</name>
@@ -777,13 +712,9 @@
                     <elementReference>Ch_Submit_for_Approval</elementReference>
                 </rightValue>
             </conditions>
-            <connector>
-                <targetReference>Submit_for_Challenge_Approval</targetReference>
-            </connector>
             <label>Submit for Approval</label>
         </rules>
     </decisions>
-    <description>A screen flow for capturing a new Operational Risk Review.</description>
     <dynamicChoiceSets>
         <name>Ch_LegalConsultation</name>
         <dataType>Picklist</dataType>
@@ -802,14 +733,26 @@
         <dataType>Date</dataType>
         <expression>({!$Flow.CurrentDate} + 30)</expression>
     </formulas>
-    <interviewLabel>Operational Risk Review FLow {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Operational Risk Review Flow</label>
+    <interviewLabel>Operational Risk Review Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Operational Risk Review</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
         <name>Create_Challenge_Record</name>
         <label>Create Challenge Record</label>
         <locationX>418</locationX>
-        <locationY>2263</locationY>
+        <locationY>2485</locationY>
         <assignRecordIdToReference>vChallengeRecordID</assignRecordIdToReference>
         <connector>
             <targetReference>Look_up_Challenge_ID_Name</targetReference>
@@ -1036,7 +979,7 @@
         <name>Create_Challenge_Record_KORKI</name>
         <label>Create Challenge Record KOR-KI</label>
         <locationX>693</locationX>
-        <locationY>2261</locationY>
+        <locationY>2483</locationY>
         <assignRecordIdToReference>vChallengeRecordID</assignRecordIdToReference>
         <connector>
             <targetReference>Look_up_Challenge_ID_Name</targetReference>
@@ -1248,10 +1191,31 @@
         <object>Challenge__c</object>
     </recordCreates>
     <recordLookups>
+        <name>get_all_biz_entities</name>
+        <label>get all biz entities</label>
+        <locationX>548</locationX>
+        <locationY>219</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>New_ORM_Challenge_Starting_Point</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Business_Entity__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Look_up_Challenge_ID_Name</name>
         <label>Look up Challenge ID Name</label>
         <locationX>572</locationX>
-        <locationY>2398</locationY>
+        <locationY>2620</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Record_Creation_Confirmation</targetReference>
@@ -1274,7 +1238,7 @@
         <name>Look_up_Entity_Attributes</name>
         <label>Look up Entity Attributes</label>
         <locationX>540</locationX>
-        <locationY>614</locationY>
+        <locationY>837</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Confirm_Entity</targetReference>
@@ -1284,7 +1248,7 @@
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>vEntityID</elementReference>
+                <elementReference>EntityLookupOrig.recordId</elementReference>
             </value>
         </filters>
         <object>Business_Entity__c</object>
@@ -1305,13 +1269,14 @@
             <field>Reporting_Level_1__c</field>
         </outputAssignments>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Confirm_Entity</name>
         <label>Confirm Entity</label>
         <locationX>539</locationX>
-        <locationY>723</locationY>
+        <locationY>945</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Decision_for_Entity</targetReference>
@@ -1346,27 +1311,21 @@
         <name>Entity_Information</name>
         <label>Entity Information</label>
         <locationX>540</locationX>
-        <locationY>501</locationY>
+        <locationY>723</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Look_up_Entity_Attributes</targetReference>
         </connector>
         <fields>
-            <name>EntityLookup</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>EntityLookupOrig</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>Business_Entity__c</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
+                    <stringValue>Challenge_Entity__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1376,16 +1335,14 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>Id</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vEntityID</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1394,9 +1351,9 @@
         <name>Finalize_Confirmation</name>
         <label>Finalize Confirmation</label>
         <locationX>570</locationX>
-        <locationY>1849</locationY>
+        <locationY>2071</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Decision_on_Completion</targetReference>
@@ -1421,9 +1378,9 @@
         <name>General_Information</name>
         <label>General Information</label>
         <locationX>544</locationX>
-        <locationY>151</locationY>
+        <locationY>373</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Check_Challenge_Record_Type</targetReference>
@@ -1514,9 +1471,9 @@
         <name>KOR_KI_Reporting_Period</name>
         <label>KOR-KI Reporting Period</label>
         <locationX>728</locationX>
-        <locationY>373</locationY>
+        <locationY>595</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Set_KOR_KI_Record_Type</targetReference>
@@ -1558,7 +1515,7 @@
         <name>KOR_KI_Specific_Key_Questions_1</name>
         <label>KOR-KI Specific Key Questions 1</label>
         <locationX>758</locationX>
-        <locationY>1239</locationY>
+        <locationY>1461</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1584,22 +1541,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>KORKI_Comments_1</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>KORKI_Comments_RichText</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vKORKI_1_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1608,7 +1553,7 @@
         <name>KOR_KI_Specific_Key_Questions_2</name>
         <label>KOR-KI Specific Key Questions 2</label>
         <locationX>761</locationX>
-        <locationY>1361</locationY>
+        <locationY>1583</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1634,22 +1579,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>KORKI_CommentsTitle_2</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>KORKI_Comments_RichText_2</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vKORKI_2_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1658,7 +1591,7 @@
         <name>KOR_KI_Specific_Key_Questions_3</name>
         <label>KOR-KI Specific Key Questions 3</label>
         <locationX>765</locationX>
-        <locationY>1477</locationY>
+        <locationY>1699</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1684,22 +1617,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>KORKI_CommentsTitle_3</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>KORKI_Comments_RichText_3</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vKORKI_3_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1708,7 +1629,7 @@
         <name>KOR_KI_Specific_Key_Questions_4</name>
         <label>KOR-KI Specific Key Questions 4</label>
         <locationX>771</locationX>
-        <locationY>1581</locationY>
+        <locationY>1803</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1734,22 +1655,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>KORKI_CommentsTitle_4</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>KORKI_Comments_RichText_4</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vKORKI_4_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1758,7 +1667,7 @@
         <name>KOR_KI_Specific_Key_Questions_5</name>
         <label>KOR-KI Specific Key Questions 5</label>
         <locationX>775</locationX>
-        <locationY>1704</locationY>
+        <locationY>1926</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1784,22 +1693,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>KORKI_CommentsTitle_5</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>KORKI_Comments_RichText_5</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vKORKI_5_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1808,94 +1705,55 @@
         <name>Lessons_Learned_Specific_Details</name>
         <label>Lessons Learned Specific Details</label>
         <locationX>364</locationX>
-        <locationY>390</locationY>
+        <locationY>612</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Set_LL_Record_Type</targetReference>
         </connector>
         <fields>
-            <name>EventSourceCustom</name>
-            <extensionName>c:dynamicQuestionFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>parentQuestionLabel</name>
-                <value>
-                    <stringValue>Is the Event Source external?</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childTextField1_label</name>
-                <value>
-                    <stringValue>Event Source</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childTextField1_defaultValue</name>
-                <value>
-                    <stringValue>External</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childTextField2_defaultValue</name>
-                <value>
-                    <stringValue>Internal</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childTextField3_label</name>
-                <value>
-                    <stringValue>External Event Reference ID</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childTextField2_label</name>
-                <value>
-                    <stringValue>Event Source</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childComponentsLinkedToYes</name>
-                <value>
-                    <stringValue>tf1 tf3</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childComponentsLinkedToNo</name>
-                <value>
-                    <stringValue>tf2 tf4</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childTextField4_label</name>
-                <value>
-                    <stringValue>Internal ID</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>parentQuestion_defaultValue</name>
-                <value>
-                    <stringValue>No</stringValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vEventSource</assignToReference>
-                <name>childTextField1_storage</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vExternalEventResource</assignToReference>
-                <name>childTextField3_storage</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vEventSource</assignToReference>
-                <name>childTextField2_storage</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vLCS_ID</assignToReference>
-                <name>childTextField4_storage</name>
-            </outputParameters>
+            <name>Internal_or_External</name>
+            <choiceReferences>cInternal</choiceReferences>
+            <choiceReferences>cExternal</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Is the Event Source Internal or External?</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>External_Event_Source_ID</name>
+            <dataType>String</dataType>
+            <fieldText>External Event Source ID</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Internal_or_External</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>cExternal</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Internal_ID</name>
+            <dataType>String</dataType>
+            <fieldText>Internal ID</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Internal_or_External</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>cInternal</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
         </fields>
         <fields>
             <name>Legal_Consultation</name>
@@ -1922,9 +1780,9 @@
         <name>LL_Specific_Key_Questions_1</name>
         <label>LL Specific Key Questions 1</label>
         <locationX>357</locationX>
-        <locationY>1241</locationY>
+        <locationY>1463</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>LL_Specific_Key_Questions_2</targetReference>
@@ -1948,22 +1806,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>LL_Comments_1</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>LL_Comments_RichText_1</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vLL_1_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -1972,9 +1818,9 @@
         <name>LL_Specific_Key_Questions_2</name>
         <label>LL Specific Key Questions 2</label>
         <locationX>355</locationX>
-        <locationY>1353</locationY>
+        <locationY>1574</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>LL_Specific_Key_Questions_3</targetReference>
@@ -1998,22 +1844,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>LL_Comments_2</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;FONT STYLE=&quot;font-size:12px&quot;&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>LL_Comments_RichText_2</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vLL_2_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2022,9 +1856,9 @@
         <name>LL_Specific_Key_Questions_3</name>
         <label>LL Specific Key Questions 3</label>
         <locationX>356</locationX>
-        <locationY>1469</locationY>
+        <locationY>1691</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>LL_Specific_Key_Questions_4</targetReference>
@@ -2048,22 +1882,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>LL_Comments_3</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>LL_Comments_RichText_3</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vLL_3_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2072,9 +1894,9 @@
         <name>LL_Specific_Key_Questions_4</name>
         <label>LL Specific Key Questions 4</label>
         <locationX>359</locationX>
-        <locationY>1581</locationY>
+        <locationY>1803</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>LL_Specific_Key_Questions_5</targetReference>
@@ -2098,22 +1920,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>LL_Comments_4</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>LL_Comments_RichText_4</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vLL_4_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2121,10 +1931,10 @@
     <screens>
         <name>LL_Specific_Key_Questions_5</name>
         <label>LL Specific Key Questions 5</label>
-        <locationX>357</locationX>
-        <locationY>1704</locationY>
+        <locationX>358</locationX>
+        <locationY>1926</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Finalize_Confirmation</targetReference>
@@ -2148,22 +1958,10 @@
             <isRequired>false</isRequired>
         </fields>
         <fields>
-            <name>LL_Comments_5</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Comments:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>LL_Comments_RichText_5</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vLL_5_Comments_Output</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <fieldText>Comments:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2171,10 +1969,10 @@
     <screens>
         <name>New_ORM_Challenge_Starting_Point</name>
         <label>New Operational Risk Starting Point</label>
-        <locationX>540</locationX>
-        <locationY>29</locationY>
+        <locationX>667</locationX>
+        <locationY>373</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>General_Information</targetReference>
@@ -2191,9 +1989,9 @@
         <name>Outcome_Details</name>
         <label>Outcome Details</label>
         <locationX>546</locationX>
-        <locationY>953</locationY>
+        <locationY>1175</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Risk_Remediation</targetReference>
@@ -2204,44 +2002,20 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>OverallObservationsTitle</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Overall Observations:&lt;/B&gt;&lt;FONT FACE=&quot;_sans&quot; STYLE=&quot;font-size:12px&quot;&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>OverallObservations</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vOverallObservationsRichText</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <name>Overall_Observations</name>
+            <fieldText>Overall Observations:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <fields>
             <name>Space878</name>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>ActionsRecommendedTitle</name>
-            <fieldText>&lt;DIV ALIGN=&quot;LEFT&quot;&gt;&lt;FONT FACE=&quot;Arial&quot; STYLE=&quot;font-size:14px&quot; COLOR=&quot;#000000&quot; LETTERSPACING=&quot;0&quot; KERNING=&quot;0&quot;&gt;&lt;B&gt;Actions Recommended:&lt;/B&gt;&lt;/FONT&gt;&lt;/DIV&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>ActionsRecommended</name>
-            <extensionName>c:richTextInputFSC</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>myVal</name>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vActionsRecommendedRichText</assignToReference>
-                <name>myVal</name>
-            </outputParameters>
+            <name>Actions_Recommended</name>
+            <fieldText>Actions Recommended:</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2250,9 +2024,9 @@
         <name>Participant_Information</name>
         <label>Participant Information</label>
         <locationX>544</locationX>
-        <locationY>856</locationY>
+        <locationY>1078</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Outcome_Details</targetReference>
@@ -2263,13 +2037,13 @@
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>PrimaryIndependentChallenger</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>sPrimaryAuditor</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>User</stringValue>
+                    <stringValue>Primary_Independent_Challenger__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -2279,43 +2053,23 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>ID</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>parentChild</name>
-                <value>
-                    <stringValue>Parent</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>filterFieldName</name>
-                <value>
-                    <stringValue>UserRoleID</stringValue>
-                </value>
-            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vPrimaryIndChallenger</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>ChallengeEntityPrimaryContact</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>PrimaryContact</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>Contact</stringValue>
+                    <stringValue>Challenge_Entity_Primary_Contact__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -2325,31 +2079,23 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>ID</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
-                </value>
-            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vChallengeEntityPrimaryContact</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>PrimaryBusinessOpRiskManager</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>PrimaryBizOpRiskManager</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>User</stringValue>
+                    <stringValue>Primary_Business_Op_Risk_Manager__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -2359,43 +2105,23 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>ID</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>parentChild</name>
-                <value>
-                    <stringValue>Parent</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>filterFieldName</name>
-                <value>
-                    <stringValue>UserRoleID</stringValue>
-                </value>
-            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vPrimaryBusinessOpRiskMgr</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>SecondaryIndependentChallenger</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>SecondaryAuditor</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>User</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -2405,43 +2131,23 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>ID</stringValue>
+                    <stringValue>Secondary_Independent_Challenger__c</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>parentChild</name>
-                <value>
-                    <stringValue>Parent</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>filterFieldName</name>
-                <value>
-                    <stringValue>UserRoleID</stringValue>
-                </value>
-            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vSecondaryIndChallenger</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>ChallengeEntitySecondaryContact</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>SecondaryContact</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>Contact</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -2451,31 +2157,23 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>ID</stringValue>
+                    <stringValue>Challenge_Entity_Secondary_Contact__c</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
-                </value>
-            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vChallengeEntitySecContact</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>SecondaryBusinessOpRiskMgr</name>
-            <extensionName>flowcomponents:lookupFSC</extensionName>
+            <name>SecondaryBizOpRiskManager</name>
+            <extensionName>flowruntime:lookup</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>objectName</name>
+                <name>objectApiName</name>
                 <value>
-                    <stringValue>User</stringValue>
+                    <stringValue>Challenge__c</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -2485,34 +2183,14 @@
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>valueFieldName</name>
+                <name>fieldApiName</name>
                 <value>
-                    <stringValue>ID</stringValue>
+                    <stringValue>Secondary_Business_Op_Risk_Manager__c</stringValue>
                 </value>
             </inputParameters>
-            <inputParameters>
-                <name>displayFieldName</name>
-                <value>
-                    <stringValue>Name</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>parentChild</name>
-                <value>
-                    <stringValue>Parent</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>filterFieldName</name>
-                <value>
-                    <stringValue>UserRoleID</stringValue>
-                </value>
-            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vSecondaryBusOpRiskMgr</assignToReference>
-                <name>selectedValue</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2521,7 +2199,7 @@
         <name>Record_Creation_Confirmation</name>
         <label>Record Creation Confirmation</label>
         <locationX>574</locationX>
-        <locationY>2521</locationY>
+        <locationY>2743</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -2553,98 +2231,64 @@
         <name>Risk_Remediation</name>
         <label>Risk Remediation</label>
         <locationX>547</locationX>
-        <locationY>1053</locationY>
+        <locationY>1275</locationY>
         <allowBack>true</allowBack>
-        <allowFinish>false</allowFinish>
+        <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
             <targetReference>Check_Challenge_Record_Type_2</targetReference>
         </connector>
         <fields>
-            <name>RiskRemediationDynamic</name>
-            <extensionName>c:dynamicQuestionFSC</extensionName>
+            <name>BizAgreement</name>
+            <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>parentQuestionLabel</name>
+                <name>label</name>
                 <value>
-                    <stringValue>Did the Business agree to take actions recommended?</stringValue>
+                    <stringValue>Business agreement to take recommended actions</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>childTextField1_label</name>
-                <value>
-                    <stringValue>Escalation Path:</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childComponentsLinkedToYes</name>
-                <value>
-                    <stringValue>tf1</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childComponentsLinkedToNo</name>
-            </inputParameters>
-            <inputParameters>
-                <name>parentQuestion_defaultValue</name>
+                <name>messageToggleInactive</name>
                 <value>
                     <stringValue>No</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Yes</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vEscalationPathText</assignToReference>
-                <name>childTextField1_storage</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vRiskRemediationYesNo</assignToReference>
-                <name>parentQuestion_value</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <fields>
-            <name>space19</name>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>RiskAcceptance</name>
-            <extensionName>c:dynamicQuestionFSC</extensionName>
+            <name>BizRiskAcceptance</name>
+            <extensionName>flowruntime:toggle</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>parentQuestionLabel</name>
+                <name>label</name>
                 <value>
-                    <stringValue>Did the Business accept risk without taking additional actions?</stringValue>
+                    <stringValue>Business acceptance of risk without taking additional actions</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
-                <name>childTextField1_label</name>
-                <value>
-                    <stringValue>Risk Acceptance Details:</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childComponentsLinkedToYes</name>
-                <value>
-                    <stringValue>tf1</stringValue>
-                </value>
-            </inputParameters>
-            <inputParameters>
-                <name>childComponentsLinkedToNo</name>
-            </inputParameters>
-            <inputParameters>
-                <name>parentQuestion_defaultValue</name>
+                <name>messageToggleInactive</name>
                 <value>
                     <stringValue>No</stringValue>
                 </value>
             </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Yes</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vRiskAcceptanceYesNo</assignToReference>
-                <name>parentQuestion_value</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vRiskAcceptanceDetailsText</assignToReference>
-                <name>childTextField1_storage</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -2679,8 +2323,14 @@
         <label>Participant Information</label>
         <stageOrder>5</stageOrder>
     </stages>
-    <startElementReference>New_ORM_Challenge_Starting_Point</startElementReference>
-    <status>Active</status>
+    <start>
+        <locationX>414</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>get_all_biz_entities</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
     <variables>
         <name>vActionsRecommendedRichText</name>
         <dataType>String</dataType>
