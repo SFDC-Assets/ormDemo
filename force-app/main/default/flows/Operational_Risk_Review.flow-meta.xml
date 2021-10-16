@@ -2330,7 +2330,7 @@
             <targetReference>get_all_biz_entities</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <variables>
         <name>vActionsRecommendedRichText</name>
         <dataType>String</dataType>
