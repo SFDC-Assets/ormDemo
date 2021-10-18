@@ -3,6 +3,6 @@ schema-version = "0.2"
 
 [com.salesforce]
 schema-version = "0.1"
-id = "docgen"
+id = "docgenjz"
 description = "A Salesforce Function"
 type = "function"
