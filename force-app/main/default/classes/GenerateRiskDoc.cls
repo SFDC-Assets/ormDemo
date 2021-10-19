@@ -9,7 +9,7 @@ public with sharing class GenerateRiskDoc {
         String helloArgs = jGen.getAsString(); 
         System.debug('args are ' + helloArgs);
 
-        functions.Function myFunction = functions.Function.get('orm.docgen');
+        functions.Function myFunction = functions.Function.get('ormDemo.docgen');
         functions.FunctionInvocation invocation = myFunction.invoke(helloArgs);
         String response = invocation.getResponse();
 
