@@ -1,0 +1,13 @@
+{
+    "LastName": "TwoTwo",
+    "FirstName": "Jacob",
+    "Email": "tester2@sfdx.org",
+    "Alias": "tester2",
+    "TimeZoneSidKey": "America/Denver",
+    "LocaleSidKey": "en_US",
+    "EmailEncodingKey": "UTF-8",
+    "LanguageLocaleKey": "en_US",
+    "profileName": "Standard Platform User",
+    "permsets": ["orm_app"],
+    "generatePassword": true
+}

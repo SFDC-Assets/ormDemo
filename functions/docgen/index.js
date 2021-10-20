@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 
 /**
- * Describe Docgen here.
+ * Generates a risk document from the questions on a risk review record
  *
  * The exported method is the entry point for your code when the function is invoked. 
  *
@@ -26,79 +26,61 @@ export default async function (event, context, logger) {
 
     logger.info(JSON.stringify(doc));
 
-    // const uowa = context.org.dataApi.newUnitOfWork();
+    const uowa = context.org.dataApi.newUnitOfWork();
 
-    // // Register a new Account for Creation
-    // const contentVersion = uowa.registerCreate({
-    //     type: "ContentVersion",
-    //     fields: {
-    //         ContentLocation: "S",
-    //         PathOnClient: "RiskReview.pdf",
-    //         Title: "Risk Review",
-    //         VersionData: data
-    //     }
-    // });
+    // Register a new Account for Creation
+    const contentVersion = uowa.registerCreate({
+        type: "ContentVersion",
+        fields: {
+            ContentLocation: "S",
+            PathOnClient: "RiskReview.pdf",
+            Title: "Risk Review",
+            VersionData: data
+        }
+    });
 
-    // try {
-    //     // Commit the Unit of Work with all the previous registered operations
-    //     const response = await context.org.dataApi.commitUnitOfWork(uowa);
-    //     const result = {
-    //         contentVersionId: response.get(contentVersion).id,
-    //     }
+    try {
+        // Commit the Unit of Work with all the previous registered operations
+        const response = await context.org.dataApi.commitUnitOfWork(uowa);
+        const result = {
+            contentVersionId: response.get(contentVersion).id,
+        }
 
-    //     logger.info(result);
+        logger.info(result);
 
-    // } catch (err) {
-    //     const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-    //     logger.error(errorMessage);
-    //     throw new Error(errorMessage);
-    // }
+    } catch (err) {
+        const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+        logger.error(errorMessage);
+        throw new Error(errorMessage);
+    }
 
-    // const conDoc = await context.org.dataApi.query(
-    //     `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
+    const conDoc = await context.org.dataApi.query(
+        `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
 
-    // logger.info(conDoc);
+    logger.info(conDoc);
 
+    // Once we've saved the document, this next UOW will associate it with the record
+    const uowb = context.org.dataApi.newUnitOfWork();
 
-    // const uowb = context.org.dataApi.newUnitOfWork();
+    // Register a new Account for Creation
+    const contentDocumentLink = uowb.registerCreate({
+        type: "ContentDocumentLink",
+        fields: {
+            LinkedEntityId: "S",
+            ContentDocumentId: conDoc.ContentDocumentId,
+            shareType: "V"
+        }
+    });
 
-    // // Register a new Account for Creation
-    // const contentDocumentLink = uowb.registerCreate({
-    //     type: "ContentDocumentLink",
-    //     fields: {
-    //         LinkedEntityId: "S",
-    //         ContentDocumentId: conDoc.ContentDocumentId,
-    //         shareType: "V"
-    //     }
-    // });
-
-    // try {
-    //     // Commit the Unit of Work with all the previous registered operations
-    //     const response = await context.org.dataApi.commitUnitOfWork(uow);
-    //     const result = {
-    //         contentVersionId: response.get(contentVersion).id,
-    //     }
-    // } catch (err) {
-    //     const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-    //     logger.error(errorMessage);
-    //     throw new Error(errorMessage);
-    // }
-
-// ContentVersion conVer = new ContentVersion();
-// conVer.ContentLocation = 'S'; // to use S specify this document is in Salesforce, to use E for external files
-// conVer.PathOnClient = 'testing.txt'; // The files name, extension is very important here which will help the file in preview.
-// conVer.Title = 'Testing Files'; // Display name of the files
-// conVer.VersionData = EncodingUtil.base64Decode(yourFilesContent); // converting your binary string to Blog
-// insert conVer;    //Insert ContentVersion
-
-
-// // First get the Content Document Id from ContentVersion Object
-// Id conDoc = [SELECT ContentDocumentId FROM ContentVersion WHERE Id =:conVer.Id].ContentDocumentId;
-// //create ContentDocumentLink  record 
-// ContentDocumentLink conDocLink = New ContentDocumentLink();
-// conDocLink.LinkedEntityId = '0066F00000qNVUv'; // Specify RECORD ID here i.e Any Object ID (Standard Object/Custom Object)
-// conDocLink.ContentDocumentId = conDoc;  //ContentDocumentId Id from ContentVersion
-// conDocLink.shareType = 'V';
-// insert conDocLink;
-
+    try {
+        // Commit the Unit of Work with all the previous registered operations
+        const response = await context.org.dataApi.commitUnitOfWork(uow);
+        const result = {
+            contentVersionId: response.get(contentVersion).id,
+        }
+    } catch (err) {
+        const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+        logger.error(errorMessage);
+        throw new Error(errorMessage);
+    }
 }
