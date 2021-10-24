@@ -25,63 +25,65 @@ export default async function (event, context, logger) {
     var data = new FormData();
     data.append('data' , pdf);
 
-    logger.info(JSON.stringify(doc));
+    logger.info(doc);
 
-    const uowa = context.org.dataApi.newUnitOfWork();
+    return 'got out!';
 
-    // Register a new Account for Creation
-    const contentVersion = uowa.registerCreate({
-        type: "ContentVersion",
-        fields: {
-            ContentLocation: "S",
-            PathOnClient: "RiskReview.pdf",
-            Title: "Risk Review",
-            VersionData: data
-        }
-    });
+//     const uowa = context.org.dataApi.newUnitOfWork();
 
-    try {
-        // Commit the Unit of Work with all the previous registered operations
-        const response = await context.org.dataApi.commitUnitOfWork(uowa);
-        const result = {
-            contentVersionId: response.get(contentVersion).id,
-        }
+//     // Register a new Account for Creation
+//     const contentVersion = uowa.registerCreate({
+//         type: "ContentVersion",
+//         fields: {
+//             ContentLocation: "S",
+//             PathOnClient: "RiskReview.pdf",
+//             Title: "Risk Review",
+//             VersionData: data
+//         }
+//     });
 
-        logger.info(result);
+//     try {
+//         // Commit the Unit of Work with all the previous registered operations
+//         const response = await context.org.dataApi.commitUnitOfWork(uowa);
+//         const result = {
+//             contentVersionId: response.get(contentVersion).id,
+//         }
 
-    } catch (err) {
-        const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-        logger.error(errorMessage);
-        throw new Error(errorMessage);
-    }
+//         logger.info(result);
 
-    const conDoc = await context.org.dataApi.query(
-        `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
+//     } catch (err) {
+//         const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+//         logger.error(errorMessage);
+//         throw new Error(errorMessage);
+//     }
 
-    logger.info(conDoc);
+//     const conDoc = await context.org.dataApi.query(
+//         `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
 
-    // Once we've saved the document, this next UOW will associate it with the record
-    const uowb = context.org.dataApi.newUnitOfWork();
+//     logger.info(conDoc);
 
-    // Register a new Account for Creation
-    const contentDocumentLink = uowb.registerCreate({
-        type: "ContentDocumentLink",
-        fields: {
-            LinkedEntityId: "S",
-            ContentDocumentId: conDoc.ContentDocumentId,
-            shareType: "V"
-        }
-    });
+//     // Once we've saved the document, this next UOW will associate it with the record
+//     const uowb = context.org.dataApi.newUnitOfWork();
 
-    try {
-        // Commit the Unit of Work with all the previous registered operations
-        const response = await context.org.dataApi.commitUnitOfWork(uow);
-        const result = {
-            contentVersionId: response.get(contentVersion).id,
-        }
-    } catch (err) {
-        const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-        logger.error(errorMessage);
-        throw new Error(errorMessage);
-    }
+//     // Register a new Account for Creation
+//     const contentDocumentLink = uowb.registerCreate({
+//         type: "ContentDocumentLink",
+//         fields: {
+//             LinkedEntityId: "S",
+//             ContentDocumentId: conDoc.ContentDocumentId,
+//             shareType: "V"
+//         }
+//     });
+
+//     try {
+//         // Commit the Unit of Work with all the previous registered operations
+//         const response = await context.org.dataApi.commitUnitOfWork(uow);
+//         const result = {
+//             contentVersionId: response.get(contentVersion).id,
+//         }
+//     } catch (err) {
+//         const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+//         logger.error(errorMessage);
+//         throw new Error(errorMessage);
+//     }
 }

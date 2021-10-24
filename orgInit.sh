@@ -14,10 +14,10 @@ sfdx force:org:open
 ## Create functions environment
 # sf env create compute -o orm -a docGenCompute
 ## commit functions first
-#sf deploy functions -o orm
+# sf deploy functions -o orm
 ## 
 # 
 
 # Test command
 # echo "GenerateRiskDoc.test('Alice');" | sfdx force:apex:execute -f /dev/stdin
-
+# sf env log tail -e docGenCompute
