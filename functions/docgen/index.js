@@ -1,6 +1,3 @@
-// Utilize JS library for document generation
-import { jsPDF } from "jspdf";
-
 /**
  * Generates a risk document from the questions on a risk review record
  *
@@ -17,13 +14,17 @@ import { jsPDF } from "jspdf";
 export default async function (event, context, logger) {
     logger.info(`Invoking Docgen with payload ${JSON.stringify(event.data || {})}`);
 
+    const { jsPDF } = require("jspdf");
+
     const doc = new jsPDF();
     doc.text("Hello world!", 10, 10);
-    var pdf = doc.output('blob');
+    logger.info(`ojibowa1`);
+
+    // var pdf = doc.output('blob');
     // doc.save("a4.pdf");
 
-    var data = new FormData();
-    data.append('data' , pdf);
+    // var data = new FormData();
+    // data.append('data' , pdf);
 
     logger.info(doc);
 
@@ -38,7 +39,7 @@ export default async function (event, context, logger) {
 //             ContentLocation: "S",
 //             PathOnClient: "RiskReview.pdf",
 //             Title: "Risk Review",
-//             VersionData: data
+//             VersionData: pdf
 //         }
 //     });
 
