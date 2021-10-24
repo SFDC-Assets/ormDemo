@@ -1,3 +1,4 @@
+// Utilize JS library for document generation
 import { jsPDF } from "jspdf";
 
 /**
