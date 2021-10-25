@@ -18,7 +18,8 @@ module.exports = async function (event, context, logger) {
       event.data || {}
     )}`
   );
-  logger.info("generating pdf...");
+  const { recordId, body } = event.data;
+  logger.info(body);
 
   const doc = new jsPDF();
   doc.text("Hello world!", 10, 10);
@@ -30,5 +31,62 @@ module.exports = async function (event, context, logger) {
 
   logger.info(JSON.stringify(doc));
 
-  return "results";
-};
+  return recordId;
+
+  //     const uowa = context.org.dataApi.newUnitOfWork();
+  
+  //     // Register a new Account for Creation
+  //     const contentVersion = uowa.registerCreate({
+  //         type: "ContentVersion",
+  //         fields: {
+  //             ContentLocation: "S",
+  //             PathOnClient: "RiskReview.pdf",
+  //             Title: "Risk Review",
+  //             VersionData: pdf
+  //         }
+  //     });
+  
+  //     try {
+  //         // Commit the Unit of Work with all the previous registered operations
+  //         const response = await context.org.dataApi.commitUnitOfWork(uowa);
+  //         const result = {
+  //             contentVersionId: response.get(contentVersion).id,
+  //         }
+  
+  //         logger.info(result);
+  
+  //     } catch (err) {
+  //         const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+  //         logger.error(errorMessage);
+  //         throw new Error(errorMessage);
+  //     }
+  
+  //     const conDoc = await context.org.dataApi.query(
+  //         `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
+  
+  //     logger.info(conDoc);
+  
+  //     // Once we've saved the document, this next UOW will associate it with the record
+  //     const uowb = context.org.dataApi.newUnitOfWork();
+  
+  //     // Register a new Account for Creation
+  //     const contentDocumentLink = uowb.registerCreate({
+  //         type: "ContentDocumentLink",
+  //         fields: {
+  //             LinkedEntityId: "S",
+  //             ContentDocumentId: conDoc.ContentDocumentId,
+  //             shareType: "V"
+  //         }
+  //     });
+  
+  //     try {
+  //         // Commit the Unit of Work with all the previous registered operations
+  //         const response = await context.org.dataApi.commitUnitOfWork(uow);
+  //         const result = {
+  //             contentVersionId: response.get(contentVersion).id,
+  //         }
+  //     } catch (err) {
+  //         const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+  //         logger.error(errorMessage);
+  //         throw new Error(errorMessage);
+  //     }};
