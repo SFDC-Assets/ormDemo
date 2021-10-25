@@ -1,5 +1,6 @@
 // import labelmake from "labelmake";
-// import jsPDF from "jspdf";
+import jsPDF from "jspdf";
+// const { jsPDF } = require("jspdf");
 
 /**
  * Generates a risk document from the questions on a risk review record
@@ -19,10 +20,10 @@ export default async function (event, context, logger) {
     const { recordId, body } = event.data;
     logger.info(body);
 
-    const { jsPDF } = require("jspdf");
+    // const { jsPDF } = require("jspdf");
     // const jsPDF = require('jspdf/dist/jspdf.node.debug')
 
-    // const doc = new jsPDF();
+    const doc = new jsPDF();
     // doc.text("Hello world!", 10, 10);
     logger.info(`ojibowa1`);
 
