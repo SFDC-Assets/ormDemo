@@ -20,7 +20,7 @@ export default async function (event, context, logger) {
     const { recordId, body } = event.data;
     logger.info(body);
 
-    // const { jsPDF } = require("jspdf");
+    const { jsPDF } = require("jspdf");
     // const jsPDF = require('jspdf/dist/jspdf.node.debug')
 
     const doc = new jsPDF();
