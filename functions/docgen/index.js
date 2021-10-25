@@ -1,5 +1,5 @@
 // import labelmake from "labelmake";
-import jsPDF from "jspdf";
+import { jsPDF } from "jspdf";
 // const { jsPDF } = require("jspdf");
 
 /**
