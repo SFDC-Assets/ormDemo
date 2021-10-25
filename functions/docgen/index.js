@@ -19,8 +19,8 @@ const { jsPDF } = require("jspdf");
  
 export default async function (event, context, logger) {
     logger.info(`Invoking Docgen with payload ${JSON.stringify(event.data || {})}`);
-    // const { recordId, body } = event.data;
-    // logger.info(body);
+    const { recordId, body } = event.data;
+    logger.info(body);
 
     // const { jsPDF } = require("jspdf");
     // const jsPDF = require('jspdf/dist/jspdf.node.debug')
