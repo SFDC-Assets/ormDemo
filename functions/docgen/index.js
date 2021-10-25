@@ -13,6 +13,7 @@
  
 export default async function (event, context, logger) {
     logger.info(`Invoking Docgen with payload ${JSON.stringify(event.data || {})}`);
+    logger.info(`ojibowaz`);
 
     const { jsPDF } = require("jspdf");
     logger.info(`ojibowa0`);
