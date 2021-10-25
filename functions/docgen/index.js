@@ -15,11 +15,11 @@ export default async function (event, context, logger) {
     logger.info(`Invoking Docgen with payload ${JSON.stringify(event.data || {})}`);
     const { recordId, body } = event.data;
 
-    // const { jsPDF } = require("jspdf");
+    const { jsPDF } = require("jspdf");
 
     // const doc = new jsPDF();
     // doc.text("Hello world!", 10, 10);
-    // logger.info(`ojibowa1`);
+    logger.info(`ojibowa1`);
 
     // var pdf = doc.output('blob');
     // doc.save("a4.pdf");
