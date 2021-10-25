@@ -1,4 +1,3 @@
-const { jsPDF } = require("jspdf");
 /**
  * Generates a risk document from the questions on a risk review record
  *
@@ -14,6 +13,8 @@ const { jsPDF } = require("jspdf");
  
 export default async function (event, context, logger) {
     logger.info(`Invoking Docgen with payload ${JSON.stringify(event.data || {})}`);
+
+    const { jsPDF } = require("jspdf");
 
     // const doc = new jsPDF();
     // doc.text("Hello world!", 10, 10);
