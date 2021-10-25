@@ -90,3 +90,4 @@ module.exports = async function (event, context, logger) {
   //         logger.error(errorMessage);
   //         throw new Error(errorMessage);
   //     }};
+}
