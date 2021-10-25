@@ -22,7 +22,11 @@ module.exports = async function (event, context, logger) {
 
   const doc = new jsPDF();
   doc.text("Hello world!", 10, 10);
-  doc.save("a4.pdf");
+  // doc.save("a4.pdf");
+
+  var pdf = doc.output('blob');
+  var data = new FormData();
+  data.append('data' , pdf);
 
   logger.info(JSON.stringify(doc));
 
