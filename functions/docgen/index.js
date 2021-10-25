@@ -17,9 +17,9 @@ const { jsPDF } = require("jspdf");
 export default async function (event, context, logger) {
     logger.info(`Invoking Docgen with payload ${JSON.stringify(event.data || {})}`);
 
-    const doc = new jsPDF();
-    doc.text("Hello world!", 10, 10);
-    logger.info(`ojibowa1`);
+    // const doc = new jsPDF();
+    // doc.text("Hello world!", 10, 10);
+    // logger.info(`ojibowa1`);
 
     // var pdf = doc.output('blob');
     // doc.save("a4.pdf");
@@ -27,7 +27,7 @@ export default async function (event, context, logger) {
     // var data = new FormData();
     // data.append('data' , pdf);
 
-    logger.info(doc);
+    // logger.info(doc);
 
     return 'got out!';
 
