@@ -20,20 +20,20 @@ export default async function (event, context, logger) {
     const { recordId, body } = event.data;
     logger.info(body);
 
-    const { jsPDF } = require("jspdf");
+    // const { jsPDF } = require("jspdf");
     // const jsPDF = require('jspdf/dist/jspdf.node.debug')
 
     const doc = new jsPDF();
-    // doc.text("Hello world!", 10, 10);
+    doc.text("Hello world!", 10, 10);
     logger.info(`ojibowa1`);
 
     // var pdf = doc.output('blob');
-    // doc.save("a4.pdf");
+    doc.save("a4.pdf");
 
     // var data = new FormData();
     // data.append('data' , pdf);
 
-    // logger.info(doc);
+    logger.info(doc);
 
     return recordId;
 
