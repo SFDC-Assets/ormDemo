@@ -21,5 +21,8 @@
     "eslint": "^6.8.0",
     "mocha": "^8.4.0",
     "sinon": "^10.0.0"
+  },
+  "dependencies": {
+    "jspdf": "^2.4.0"
   }
 }
