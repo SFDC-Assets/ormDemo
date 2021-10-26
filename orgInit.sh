@@ -18,6 +18,6 @@ sfdx force:org:open
 ## 
 # 
 
-# Test command
-# echo "GenerateRiskDoc.test('Alice');" | sfdx force:apex:execute -f /dev/stdin
+# Test command, now defunct, update a risk record to under review to trigger flow+apex invocable method
+# echo "GenerateRiskDoc.test('abc', 'sasquatch');" | sfdx force:apex:execute -f /dev/stdin
 # sf env log tail -e docGenCompute

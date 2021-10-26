@@ -32,10 +32,10 @@ module.exports = async function (event, context, logger) {
   // logger.info(JSON.stringify(doc));
   logger.info(doc.output());
 
-  const uowa = context.org.dataApi.newUnitOfWork();
+  const uow = context.org.dataApi.newUnitOfWork();
 
   // Register a new Account for Creation
-  const contentVersion = uowa.registerCreate({
+  const contentVersionId = uow.registerCreate({
     type: "ContentVersion",
     fields: {
       ContentLocation: "S",
@@ -44,34 +44,40 @@ module.exports = async function (event, context, logger) {
       VersionData: doc.output()
     }
   });
-  
-  logger.info(`AAAAAAAAAAAAAAAAAA`);
 
-      try {
-          // Commit the Unit of Work with all the previous registered operations
-          const response = await context.org.dataApi.commitUnitOfWork(uowa);
-          const conDocId = response.get(contentVersion).id;
-          logger.info(`BBBBBBBBBBBBBBBBBBBB ` + conDocId);
-      } catch (err) {
-          const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-          logger.error(errorMessage);
-          throw new Error(errorMessage);
-      }
+  // Register a new Account for Creation
+  const contentDocumentLinkId = uow.registerCreate({
+    type: "ContentDocumentLink",
+    fields: {
+        LinkedEntityId: "S",
+        ContentDocumentId: contentVersion,
+        shareType: "V"
+    }
+});
+  
+logger.info(`AAAAAAAAAAAAAAAAAA`);
+
+try {
+    // Commit the Unit of Work with all the previous registered operations
+    const response = await context.org.dataApi.commitUnitOfWork(uow);
+    const result = {
+      contentVersionId: response.get(contentVersionId).id,
+      contentDocumentLinkId: response.get(contentDocumentLinkId).id,
+    }
+    // const conDocId = response.get(contentVersion).Id;
+    logger.info(`BBBBBBBBBBBBBBBBBBBB ` + contentVersionId + ` ` + contentDocumentLinkId);
+
+    return result;
+} catch (err) {
+    const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+    logger.error(errorMessage);
+    throw new Error(errorMessage);
+}
   
       // Once we've saved the document, this next UOW will associate it with the record
-      const uowb = context.org.dataApi.newUnitOfWork();
+      // const uowb = context.org.dataApi.newUnitOfWork();
   
-      // Register a new Account for Creation
-      const contentDocumentLink = uowb.registerCreate({
-          type: "ContentDocumentLink",
-          fields: {
-              LinkedEntityId: "S",
-              ContentDocumentId: conDocId,
-              shareType: "V"
-          }
-      });
-
-      logger.info(`CCCCCCCCCCCCCCCCCCCC`);
+      // logger.info(`CCCCCCCCCCCCCCCCCCCC`);
   
       // try {
       //     // Commit the Unit of Work with all the previous registered operations
@@ -84,8 +90,8 @@ module.exports = async function (event, context, logger) {
       //     throw new Error(errorMessage);
       // }};
 
-      logger.info(`DDDDDDDDDDDDDDDDDDDD`);
+  //     logger.info(`DDDDDDDDDDDDDDDDDDDD`);
 
 
-  return result;
+  // return result;
 }
