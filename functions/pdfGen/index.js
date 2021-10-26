@@ -18,8 +18,8 @@ module.exports = async function (event, context, logger) {
       event.data || {}
     )}`
   );
-  const { recordId, body } = event.data;
-  logger.info(body);
+  const { recordId } = event.data;
+  logger.info(recordId);
 
   const doc = new jsPDF();
   doc.text("Hello world!", 10, 10);
