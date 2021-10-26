@@ -50,7 +50,7 @@ module.exports = async function (event, context, logger) {
     type: "ContentDocumentLink",
     fields: {
         LinkedEntityId: "S",
-        ContentDocumentId: contentVersion,
+        ContentDocumentId: contentVersionId,
         shareType: "V"
     }
 });
