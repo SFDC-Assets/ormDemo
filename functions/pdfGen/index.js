@@ -30,7 +30,7 @@ module.exports = async function (event, context, logger) {
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(pdf);
+  logger.info(doc);
 
   const uowa = context.org.dataApi.newUnitOfWork();
 
