@@ -50,7 +50,7 @@ module.exports = async function (event, context, logger) {
       try {
           // Commit the Unit of Work with all the previous registered operations
           const response = await context.org.dataApi.commitUnitOfWork(uowa);
-          const conDocId = response.get(contentVersion).id,
+          const conDocId = response.get(contentVersion).id;
   
           logger.info(conDocId);
   
@@ -80,9 +80,8 @@ module.exports = async function (event, context, logger) {
       try {
           // Commit the Unit of Work with all the previous registered operations
           const response = await context.org.dataApi.commitUnitOfWork(uowb);
-          const result = {
-              contentVersionId: response.get(contentDocumentLink).id,
-          }
+          const conDocLinkId = response.get(contentDocumentLink).id;
+          logger.info(conDocLinkId);
       } catch (err) {
           const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
           logger.error(errorMessage);
