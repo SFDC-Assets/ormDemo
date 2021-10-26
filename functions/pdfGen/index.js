@@ -18,7 +18,7 @@ module.exports = async function (event, context, logger) {
       event.data || {}
     )}`
   );
-  const { recordId } = event.data;
+  const { recordId, body } = event.data;
   logger.info(recordId);
 
   const doc = new jsPDF();
