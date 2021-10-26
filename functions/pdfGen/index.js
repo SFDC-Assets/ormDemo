@@ -25,26 +25,25 @@ module.exports = async function (event, context, logger) {
   doc.text("Hello world!", 10, 10);
   // doc.save("a4.pdf");
 
-  // // var pdf = doc.output('blob');
+  var pdf =btoa(doc.output());
   // var data = new FormData();
   // data.append('data' , pdf);
 
-  logger.info(JSON.stringify(doc));
+  // logger.info(JSON.stringify(doc));
+  logger.info(pdf);
 
-  return recordId;
+  const uowa = context.org.dataApi.newUnitOfWork();
 
-  //     const uowa = context.org.dataApi.newUnitOfWork();
-  
-  //     // Register a new Account for Creation
-  //     const contentVersion = uowa.registerCreate({
-  //         type: "ContentVersion",
-  //         fields: {
-  //             ContentLocation: "S",
-  //             PathOnClient: "RiskReview.pdf",
-  //             Title: "Risk Review",
-  //             VersionData: pdf
-  //         }
-  //     });
+  // Register a new Account for Creation
+  const contentVersion = uowa.registerCreate({
+    type: "ContentVersion",
+    fields: {
+      ContentLocation: "S",
+      PathOnClient: "RiskReview.pdf",
+      Title: "Risk Review",
+      VersionData: pdf
+    }
+  });
   
   //     try {
   //         // Commit the Unit of Work with all the previous registered operations
@@ -90,4 +89,6 @@ module.exports = async function (event, context, logger) {
   //         logger.error(errorMessage);
   //         throw new Error(errorMessage);
   //     }};
+
+  return recordId;
 }
