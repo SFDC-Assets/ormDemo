@@ -60,23 +60,23 @@ module.exports = async function (event, context, logger) {
           throw new Error(errorMessage);
       }
   
-  //     const conDoc = await context.org.dataApi.query(
-  //         `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
+      const conDoc = await context.org.dataApi.query(
+          `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
   
-  //     logger.info(conDoc);
+      logger.info(conDoc);
   
-  //     // Once we've saved the document, this next UOW will associate it with the record
-  //     const uowb = context.org.dataApi.newUnitOfWork();
+      // Once we've saved the document, this next UOW will associate it with the record
+      const uowb = context.org.dataApi.newUnitOfWork();
   
-  //     // Register a new Account for Creation
-  //     const contentDocumentLink = uowb.registerCreate({
-  //         type: "ContentDocumentLink",
-  //         fields: {
-  //             LinkedEntityId: "S",
-  //             ContentDocumentId: conDoc.ContentDocumentId,
-  //             shareType: "V"
-  //         }
-  //     });
+      // Register a new Account for Creation
+      const contentDocumentLink = uowb.registerCreate({
+          type: "ContentDocumentLink",
+          fields: {
+              LinkedEntityId: "S",
+              ContentDocumentId: conDoc.ContentDocumentId,
+              shareType: "V"
+          }
+      });
   
   //     try {
   //         // Commit the Unit of Work with all the previous registered operations
