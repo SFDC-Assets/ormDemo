@@ -25,7 +25,7 @@ module.exports = async function (event, context, logger) {
   doc.text("Hello world!", 10, 10);
   // doc.save("a4.pdf");
 
-  var pdf =btoa(doc.output());
+  // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
   // data.append('data' , pdf);
 
@@ -41,7 +41,7 @@ module.exports = async function (event, context, logger) {
       ContentLocation: "S",
       PathOnClient: "RiskReview.pdf",
       Title: "Risk Review",
-      VersionData: pdf
+      VersionData: doc.output()
     }
   });
   
