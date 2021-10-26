@@ -50,11 +50,9 @@ module.exports = async function (event, context, logger) {
       try {
           // Commit the Unit of Work with all the previous registered operations
           const response = await context.org.dataApi.commitUnitOfWork(uowa);
-          // const result = {
-          //     contentVersionId: response.get(contentVersion).id,
-          // }
+          const conDocId = response.get(contentVersion).id,
   
-          logger.info(response.get(contentVersion).id);
+          logger.info(conDocId);
   
       } catch (err) {
           const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
@@ -64,11 +62,6 @@ module.exports = async function (event, context, logger) {
 
   logger.info(`BBBBBBBBBBBBBBBBBBBB`);
   
-      const conDoc = await context.org.dataApi.query(
-          `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
-  
-      logger.info(`CCCCCCCCCCCCCCCCCCCCC` + conDoc.ContentDocumentId);
-  
       // Once we've saved the document, this next UOW will associate it with the record
       const uowb = context.org.dataApi.newUnitOfWork();
   
@@ -77,22 +70,27 @@ module.exports = async function (event, context, logger) {
           type: "ContentDocumentLink",
           fields: {
               LinkedEntityId: "S",
-              ContentDocumentId: conDoc.ContentDocumentId,
+              ContentDocumentId: conDocId,
               shareType: "V"
           }
       });
+
+      logger.info(`CCCCCCCCCCCCCCCCCCCC`);
   
-  //     try {
-  //         // Commit the Unit of Work with all the previous registered operations
-  //         const response = await context.org.dataApi.commitUnitOfWork(uow);
-  //         const result = {
-  //             contentVersionId: response.get(contentVersion).id,
-  //         }
-  //     } catch (err) {
-  //         const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-  //         logger.error(errorMessage);
-  //         throw new Error(errorMessage);
-  //     }};
+      try {
+          // Commit the Unit of Work with all the previous registered operations
+          const response = await context.org.dataApi.commitUnitOfWork(uow);
+          const result = {
+              contentVersionId: response.get(contentVersion).id,
+          }
+      } catch (err) {
+          const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+          logger.error(errorMessage);
+          throw new Error(errorMessage);
+      }};
+
+      logger.info(`DDDDDDDDDDDDDDDDDDDD`);
+
 
   return recordId;
 }
