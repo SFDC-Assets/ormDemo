@@ -1,20 +1,27 @@
 public with sharing class GenerateRiskDoc {
-    public static String test(String recordId, String body) {
+    @InvocableMethod(label='Generate Risk Document' description='Creates & attaches risk document to risk review record.' category='Approvals')
+    public static List<String> invokeDocGen(List<Input> input) {
         System.debug('Invoking docgen function');
-
-        System.JSONGenerator jGen = System.JSON.createGenerator(false);
-        jGen.writeStartObject();
-        jGen.writeStringField('recordId', recordId);
-        jGen.writeStringField('body', body);
-        jGen.writeEndObject();
-        String docGenArgs = jGen.getAsString(); 
-        System.debug('args are ' + docGenArgs);
-
-        functions.Function myFunction = functions.Function.get('ormDemo.docgen');
-        functions.FunctionInvocation invocation = myFunction.invoke(docGenArgs);
+		Input payload = input.get(0);
+        List<String> responses = new List<String>();
+        
+        functions.Function myFunction = functions.Function.get('ormDemo.pdfgen');
+        functions.FunctionInvocation invocation = myFunction.invoke(JSON.serialize(payload));
+        
+        if (invocation.getStatus() == functions.FunctionInvocationStatus.ERROR) {
+            throw new CalloutException( (invocation.getError() != null ? invocation.getError().getMessage(): 'UNKNOWN') );
+        }
         String response = invocation.getResponse();
-
         System.debug('Response from myfunction ' + response);
-        return response;
+        responses.add(response);
+        
+        return responses;
+    }
+
+    public class Input {
+        @InvocableVariable
+        public String recordId;
+        @InvocableVariable
+        public String body;
     }
 }
