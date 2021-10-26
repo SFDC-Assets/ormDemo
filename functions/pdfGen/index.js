@@ -67,7 +67,7 @@ module.exports = async function (event, context, logger) {
       const conDoc = await context.org.dataApi.query(
           `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
   
-      logger.info(conDoc.ContentDocumentId);
+      logger.info(`CCCCCCCCCCCCCCCCCCCCC` + conDoc.ContentDocumentId);
   
       // Once we've saved the document, this next UOW will associate it with the record
       const uowb = context.org.dataApi.newUnitOfWork();
