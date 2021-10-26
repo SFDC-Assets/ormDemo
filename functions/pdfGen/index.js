@@ -45,6 +45,8 @@ module.exports = async function (event, context, logger) {
     }
   });
   
+  logger.info(`AAAAAAAAAAAAAAAAAA`);
+
       try {
           // Commit the Unit of Work with all the previous registered operations
           const response = await context.org.dataApi.commitUnitOfWork(uowa);
@@ -59,6 +61,8 @@ module.exports = async function (event, context, logger) {
           logger.error(errorMessage);
           throw new Error(errorMessage);
       }
+
+  logger.info(`BBBBBBBBBBBBBBBBBBBB`);
   
       const conDoc = await context.org.dataApi.query(
           `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
