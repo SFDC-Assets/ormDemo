@@ -30,7 +30,7 @@ module.exports = async function (event, context, logger) {
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(doc);
+  logger.info(doc.output());
 
   const uowa = context.org.dataApi.newUnitOfWork();
 
@@ -45,20 +45,20 @@ module.exports = async function (event, context, logger) {
     }
   });
   
-  //     try {
-  //         // Commit the Unit of Work with all the previous registered operations
-  //         const response = await context.org.dataApi.commitUnitOfWork(uowa);
-  //         const result = {
-  //             contentVersionId: response.get(contentVersion).id,
-  //         }
+      try {
+          // Commit the Unit of Work with all the previous registered operations
+          const response = await context.org.dataApi.commitUnitOfWork(uowa);
+          const result = {
+              contentVersionId: response.get(contentVersion).id,
+          }
   
-  //         logger.info(result);
+          logger.info(result);
   
-  //     } catch (err) {
-  //         const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-  //         logger.error(errorMessage);
-  //         throw new Error(errorMessage);
-  //     }
+      } catch (err) {
+          const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
+          logger.error(errorMessage);
+          throw new Error(errorMessage);
+      }
   
   //     const conDoc = await context.org.dataApi.query(
   //         `SELECT ContentDocumentId FROM ContentVersion WHERE Id =${result.contentVersionId}`);
