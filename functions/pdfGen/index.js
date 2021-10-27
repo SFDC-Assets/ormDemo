@@ -34,7 +34,7 @@ module.exports = async function (event, context, logger) {
 
   const uow = context.org.dataApi.newUnitOfWork();
 
-  // Register a new Account for Creation
+  // Register a new ContentVersion for Creation
   const contentVersionId = uow.registerCreate({
     type: "ContentVersion",
     fields: {
@@ -45,15 +45,18 @@ module.exports = async function (event, context, logger) {
     }
   });
 
-  // Register a new Account for Creation
-  const contentDocumentLinkId = uow.registerCreate({
-    type: "ContentDocumentLink",
-    fields: {
-        LinkedEntityId: "S",
-        ContentDocumentId: contentVersionId,
-        shareType: "V"
-    }
-});
+  logger.info(`AAAAAAAAAAAAAAAAAA`);
+
+
+  // Register a new ContentDocumentLink for Creation
+//   const contentDocumentLinkId = uow.registerCreate({
+//     type: "ContentDocumentLink",
+//     fields: {
+//         LinkedEntityId: "S",
+//         ContentDocumentId: contentVersionId,
+//         shareType: "V"
+//     }
+// });
   
 logger.info(`AAAAAAAAAAAAAAAAAA`);
 
@@ -62,10 +65,10 @@ try {
     const response = await context.org.dataApi.commitUnitOfWork(uow);
     const result = {
       contentVersionId: response.get(contentVersionId).id,
-      contentDocumentLinkId: response.get(contentDocumentLinkId).id,
+      // contentDocumentLinkId: response.get(contentDocumentLinkId).id,
     }
     // const conDocId = response.get(contentVersion).Id;
-    logger.info(`BBBBBBBBBBBBBBBBBBBB ` + contentVersionId + ` ` + contentDocumentLinkId);
+    logger.info(`BBBBBBBBBBBBBBBBBBBB ` + contentVersionId + ` `);
 
     return result;
 } catch (err) {
