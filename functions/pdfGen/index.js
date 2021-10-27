@@ -68,7 +68,7 @@ try {
       // contentDocumentLinkId: response.get(contentDocumentLinkId).id,
     }
     // const conDocId = response.get(contentVersion).Id;
-    logger.info(`BBBBBBBBBBBBBBBBBBBB ` + contentVersionId + ` `);
+    logger.info(`BBBBBBBBBBBBBBBBBBBB ` + result.contentVersionId + ` `);
 
     return result;
 } catch (err) {
