@@ -31,6 +31,7 @@ module.exports = async function (event, context, logger) {
   // var blobEncoding = encodeURIComponent(blobPDF);
   var reader = new FileReader();
   var source = reader.readAsDataURL(blobPDF);
+  var fileInput = source.result;
 
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
@@ -49,7 +50,7 @@ module.exports = async function (event, context, logger) {
       PathOnClient: "RiskReview.pdf",
       // origin: "H",
       Title: "Risk Review",
-      VersionData: source.result,
+      VersionData: fileInput,
       FirstPublishLocationId: recordId
     }
   });
