@@ -25,14 +25,14 @@ module.exports = async function (event, context, logger) {
   doc.text("Hello world!", 10, 10);
   // doc.save("a4.pdf");
 
-  const file = doc.output('arraybuffer');
+  const file = pdf.output('datauristring').split(',')[1];
 
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(doc.output());
+  logger.info(file);
 
   const uow = context.org.dataApi.newUnitOfWork();
 
