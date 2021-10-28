@@ -40,7 +40,7 @@ module.exports = async function (event, context, logger) {
     fields: {
       ContentLocation: "S",
       PathOnClient: "RiskReview.pdf",
-      origin: "H",
+      // origin: "H",
       Title: "Risk Review",
       VersionData: doc.output(),
       FirstPublishLocationId: recordId
