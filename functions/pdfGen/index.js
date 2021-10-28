@@ -27,10 +27,10 @@ module.exports = async function (event, context, logger) {
 
   // const file = pdf.output('datauristring').split(',')[1];
   // var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
-  // var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
+  var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
   // var blobEncoding = encodeURIComponent(blobPDF);
-  // var reader = new FileReader();
-  // var source = reader.readAsBinaryString(blobPDF);
+  var reader = new FileReader();
+  var source = reader.readAsDataURL(blobPDF);
 
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
@@ -49,7 +49,7 @@ module.exports = async function (event, context, logger) {
       PathOnClient: "RiskReview.pdf",
       // origin: "H",
       Title: "Risk Review",
-      VersionData: doc,
+      VersionData: source.result,
       FirstPublishLocationId: recordId
     }
   });
