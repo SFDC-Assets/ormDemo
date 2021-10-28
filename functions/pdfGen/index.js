@@ -25,7 +25,9 @@ module.exports = async function (event, context, logger) {
   doc.text("Hello world!", 10, 10);
   // doc.save("a4.pdf");
 
-  var pdf = Buffer.from(doc.output(), base64);
+  const file = doc.output('blob');
+
+  // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
   // data.append('data' , pdf);
 
@@ -42,7 +44,7 @@ module.exports = async function (event, context, logger) {
       PathOnClient: "RiskReview.pdf",
       // origin: "H",
       Title: "Risk Review",
-      VersionData: pdf,
+      VersionData: file,
       FirstPublishLocationId: recordId
     }
   });
