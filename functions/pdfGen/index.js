@@ -25,13 +25,14 @@ module.exports = async function (event, context, logger) {
   doc.text("Hello world!", 10, 10);
   // doc.save("a4.pdf");
 
-  // const file = pdf.output('datauristring').split(',')[1];
-  var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
+  const file = pdf.output();
+  const file = pdf.output('datauristring').split(',')[1];
+  // var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
   // var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
   // var blobEncoding = encodeURIComponent(blobPDF);
-  var reader = new FileReader();
-  var source = reader.readAsDataURL(blobPDF);
-  var fileInput = source.result;
+  // var reader = new FileReader();
+  // var source = reader.readAsDataURL(blobPDF);
+  // var fileInput = source.result;
 
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
