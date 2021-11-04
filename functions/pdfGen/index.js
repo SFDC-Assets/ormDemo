@@ -25,7 +25,7 @@ module.exports = async function (event, context, logger) {
   doc.text("Hello world!", 10, 10);
   // doc.save("a4.pdf");
 
-  const file = pdf.output();
+  const file = doc.output();
   // const file = pdf.output('datauristring').split(',')[1];
   // var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
   // var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
