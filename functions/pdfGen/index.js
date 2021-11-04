@@ -39,7 +39,7 @@ module.exports = async function (event, context, logger) {
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(doc);
+  logger.info(file);
 
   // const formData = new FormData();
   // const fileField = document.querySelector('input[type="file"]');
