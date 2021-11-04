@@ -26,7 +26,7 @@ module.exports = async function (event, context, logger) {
   // doc.save("a4.pdf");
 
   const file = pdf.output();
-  const file = pdf.output('datauristring').split(',')[1];
+  // const file = pdf.output('datauristring').split(',')[1];
   // var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
   // var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
   // var blobEncoding = encodeURIComponent(blobPDF);
@@ -71,7 +71,7 @@ module.exports = async function (event, context, logger) {
       PathOnClient: "RiskReview.pdf",
       // origin: "H",
       Title: "Risk Review",
-      VersionData: fileInput,
+      VersionData: file,
       FirstPublishLocationId: recordId
     }
   });
