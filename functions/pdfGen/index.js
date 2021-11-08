@@ -71,7 +71,7 @@ module.exports = async function (event, context, logger) {
       PathOnClient: "RiskReview.pdf",
       // origin: "H",
       Title: "Risk Review",
-      VersionData: btoa(file),
+      VersionData: file,
       FirstPublishLocationId: recordId
     }
   });
