@@ -13,11 +13,19 @@ const { jsPDF } = require("jspdf");
  *                 to a given execution of a function.
  */
 module.exports = async function (event, context, logger) {
-  logger.info(
-    `Invoking environmentjs Function with payload ${JSON.stringify(
-      event.data || {}
-    )}`
-  );
+  logger.info(`Invoking environmentjs Function with payload ${JSON.stringify(event.data || {} )}`);
+  const { accessToken, baseUrl, apiVersion } = context.org.dataApi;
+
+  // Setup Bulk API Authorization headers
+  const authHeaders = {
+    Authorization: `Bearer ${accessToken}`
+  };
+
+  // Construct API URL for Bulk API v2
+  const apiUrl = `${baseUrl}/services/data/v${apiVersion}`;  
+
+  logger.info('apiUrl=' + apiUrl);
+
   const { recordId, body } = event.data;
   logger.info(recordId);
 
@@ -41,6 +49,27 @@ module.exports = async function (event, context, logger) {
   // logger.info(JSON.stringify(doc));
   logger.info(file);
 
+
+  // Create a new Bulk API Job
+  const { statusCode: statusCodeJob, body: bodyJob } = await request(
+    `${apiUrl}/sobjects/Document`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeaders
+      },
+      body: JSON.stringify({
+        operation: "upsert",
+        object: "Account",
+        contentType: "CSV",
+        externalIdFieldName: "ExternalID__c"
+      })
+    }
+  );
+
+
+
   // const formData = new FormData();
   // const fileField = document.querySelector('input[type="file"]');
   
@@ -58,39 +87,4 @@ module.exports = async function (event, context, logger) {
   // .catch(error => {
   //   console.error('Error:', error);
   // });
-  
-
-
-  const uow = context.org.dataApi.newUnitOfWork();
-
-  // Register a new ContentVersion for Creation
-  const contentVersionId = uow.registerCreate({
-    type: "ContentVersion",
-    fields: {
-      ContentLocation: "S",
-      PathOnClient: "RiskReview.pdf",
-      // origin: "H",
-      Title: "Risk Review",
-      VersionData: btoa(file),
-      FirstPublishLocationId: recordId
-    }
-  });
-
-  logger.info(`AAAAAAAAAAAAAAAAAA`);
-
-  try {
-      // Commit the Unit of Work with all the previous registered operations
-      const response = await context.org.dataApi.commitUnitOfWork(uow);
-      const result = {
-        contentVersionId: response.get(contentVersionId).id,
-      }
-
-      logger.info(`BBBBBBBBBBBBBBBBBBBB ` + result.contentVersionId + ` `);
-
-      return result;
-  } catch (err) {
-      const errorMessage = `Failed to insert record. Root Cause : ${err.message}`;
-      logger.error(errorMessage);
-      throw new Error(errorMessage);
-  }
 }
