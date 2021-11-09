@@ -34,7 +34,7 @@ module.exports = async function (event, context, logger) {
   doc.text(response4, 20, 150);
   doc.text(question5, 10, 170);
   doc.text(response5, 20, 180);
-  doc.save("a4.pdf");
+  // doc.save("a4.pdf");
 
   const file = doc.output();
   // const file = pdf.output('datauristring').split(',')[1];
@@ -44,7 +44,7 @@ module.exports = async function (event, context, logger) {
   // var reader = new FileReader();
   // var source = reader.readAsDataURL(blobPDF);
   // var fileInput = source.result;
-  // const pdfFile=btoa(file);
+  const pdfFile=atob(file);
 
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
@@ -83,7 +83,7 @@ module.exports = async function (event, context, logger) {
       PathOnClient: "RiskReview.pdf",
       // origin: "H",
       Title: "Risk Review",
-      VersionData: file,
+      VersionData: pdfFile,
       FirstPublishLocationId: recordId
     }
   });
