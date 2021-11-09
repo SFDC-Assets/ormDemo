@@ -44,8 +44,8 @@ module.exports = async function (event, context, logger) {
   // var reader = new FileReader();
   // var source = reader.readAsDataURL(blobPDF);
   // var fileInput = source.result;
-  const pdfFile=atob(file);
-
+  const pdfFile=Buffer.from(file).toString('base64');
+  
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
   // data.append('data' , pdf);
