@@ -26,18 +26,18 @@ module.exports = async function (event, context, logger) {
   doc.text("Operational Risk Review for " + title, 25, 25);
   doc.setFontSize(9);
   doc.text(question1, 10, 50);
-  doc.text(response1, 10, 60);
+  doc.text(response1, 20, 60);
   doc.text(question2, 10, 80);
-  doc.text(response2, 10, 90);
+  doc.text(response2, 20, 90);
   doc.text(question3, 10, 110);
-  doc.text(response3, 10, 120);
+  doc.text(response3, 20, 120);
   doc.text(question4, 10, 140);
-  doc.text(response4, 10, 150);
+  doc.text(response4, 20, 150);
   doc.text(question5, 10, 170);
-  doc.text(response5, 10, 180);
+  doc.text(response5, 20, 180);
   // doc.save("a4.pdf");
 
-  const file = doc.output(`datauri`);
+  const file = doc.output();
   // const file = pdf.output('datauristring').split(',')[1];
   // var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
   // var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
@@ -51,7 +51,7 @@ module.exports = async function (event, context, logger) {
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(file);
+  logger.info(doc);
 
   // const formData = new FormData();
   // const fileField = document.querySelector('input[type="file"]');
