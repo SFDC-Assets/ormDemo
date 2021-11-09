@@ -2,7 +2,6 @@
 
 const { jsPDF } = require("jspdf");
 
-
 /**
  * Attempts to create and manipulate a pdf based on some inputs
  * 
@@ -45,6 +44,7 @@ module.exports = async function (event, context, logger) {
   // var reader = new FileReader();
   // var source = reader.readAsDataURL(blobPDF);
   // var fileInput = source.result;
+  // const pdfFile=btoa(file);
 
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
