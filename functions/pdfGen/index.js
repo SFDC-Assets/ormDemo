@@ -34,7 +34,7 @@ module.exports = async function (event, context, logger) {
   doc.text(response4, 20, 150);
   doc.text(question5, 10, 170);
   doc.text(response5, 20, 180);
-  // doc.save("a4.pdf");
+  doc.save("a4.pdf");
 
   const file = doc.output();
   // const file = pdf.output('datauristring').split(',')[1];
@@ -51,7 +51,7 @@ module.exports = async function (event, context, logger) {
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(doc);
+  logger.info(file);
 
   // const formData = new FormData();
   // const fileField = document.querySelector('input[type="file"]');
