@@ -9,15 +9,75 @@
         <actionType>apex</actionType>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
         <inputParameters>
-            <name>body</name>
+            <name>question1</name>
             <value>
-                <elementReference>$Record.Id</elementReference>
+                <elementReference>$Record.Key_Question_1_KOR_KI__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>question2</name>
+            <value>
+                <elementReference>$Record.Key_Question_2_KOR_KI__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>question3</name>
+            <value>
+                <elementReference>$Record.Key_Question_3_KOR_KI__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>question4</name>
+            <value>
+                <elementReference>$Record.Key_Question_4_KOR_KI__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>question5</name>
+            <value>
+                <elementReference>$Record.Key_Question_5_KOR_KI__c</elementReference>
             </value>
         </inputParameters>
         <inputParameters>
             <name>recordId</name>
             <value>
                 <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>response1</name>
+            <value>
+                <elementReference>$Record.Response_to_KOR_KI_Question_1__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>response2</name>
+            <value>
+                <elementReference>$Record.Response_to_KOR_KI_Question_2__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>response3</name>
+            <value>
+                <elementReference>$Record.Response_to_KOR_KI_Question_3__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>response4</name>
+            <value>
+                <elementReference>$Record.Response_to_KOR_KI_Question_4__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>response5</name>
+            <value>
+                <elementReference>$Record.Response_to_KOR_KI_Question_5__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>title</name>
+            <value>
+                <elementReference>$Record.Challenge_Title__c</elementReference>
             </value>
         </inputParameters>
         <storeOutputAutomatically>true</storeOutputAutomatically>

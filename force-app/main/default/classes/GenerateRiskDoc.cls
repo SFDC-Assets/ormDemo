@@ -22,6 +22,26 @@ public with sharing class GenerateRiskDoc {
         @InvocableVariable
         public String recordId;
         @InvocableVariable
-        public String body;
+        public String title;
+        @InvocableVariable
+        public String question1;
+        @InvocableVariable
+        public String question2;
+        @InvocableVariable
+        public String question3;
+        @InvocableVariable
+        public String question4;
+        @InvocableVariable
+        public String question5;
+        @InvocableVariable
+        public String response1;
+        @InvocableVariable
+        public String response2;
+        @InvocableVariable
+        public String response3;
+        @InvocableVariable
+        public String response4;
+        @InvocableVariable
+        public String response5;
     }
 }

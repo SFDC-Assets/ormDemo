@@ -18,11 +18,23 @@ module.exports = async function (event, context, logger) {
       event.data || {}
     )}`
   );
-  const { recordId, body } = event.data;
+  const { recordId, title, question1, question2, question3, question4, question5, response1, response2, response3, response4, response5 } = event.data;
   logger.info(recordId);
 
   const doc = new jsPDF();
-  doc.text("Hello world!", 10, 10);
+  doc.setFontSize(16);
+  doc.text("Operational Risk Review for " + title, 25, 25);
+  doc.setFontSize(9);
+  doc.text(question1, 10, 50);
+  doc.text(response1, 10, 60);
+  doc.text(question2, 10, 80);
+  doc.text(response2, 10, 90);
+  doc.text(question3, 10, 110);
+  doc.text(response3, 10, 120);
+  doc.text(question4, 10, 140);
+  doc.text(response4, 10, 150);
+  doc.text(question5, 10, 170);
+  doc.text(response5, 10, 180);
   // doc.save("a4.pdf");
 
   const file = doc.output(`datauri`);
