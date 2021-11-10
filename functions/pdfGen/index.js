@@ -45,13 +45,13 @@ module.exports = async function (event, context, logger) {
   // var source = reader.readAsDataURL(blobPDF);
   // var fileInput = source.result;
   const pdfFile=Buffer.from(file).toString('base64');
-  
+
   // var pdf = Buffer.from(doc.output(), base64);
   // var data = new FormData();
   // data.append('data' , pdf);
 
   // logger.info(JSON.stringify(doc));
-  logger.info(file);
+  logger.info(pdfFile);
 
   // const formData = new FormData();
   // const fileField = document.querySelector('input[type="file"]');
