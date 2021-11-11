@@ -22,7 +22,7 @@ module.exports = async function (event, context, logger) {
 
   const doc = new jsPDF();
   doc.setFontSize(16);
-  doc.text("Operational Risk Review for " + title, 25, 25);
+  doc.text(title + " Risk Review", 25, 25);
   doc.setFontSize(9);
   doc.text(question1, 10, 50);
   doc.text(response1, 20, 60);
@@ -34,44 +34,10 @@ module.exports = async function (event, context, logger) {
   doc.text(response4, 20, 150);
   doc.text(question5, 10, 170);
   doc.text(response5, 20, 180);
-  // doc.save("a4.pdf");
 
   const file = doc.output();
-  // const file = pdf.output('datauristring').split(',')[1];
-  // var blobPDF = new Blob([doc.output('bloburi')], {type: 'application/pdf'});
-  // var blobPDF = new Blob([doc.output()], {type: 'application/pdf'});
-  // var blobEncoding = encodeURIComponent(blobPDF);
-  // var reader = new FileReader();
-  // var source = reader.readAsDataURL(blobPDF);
-  // var fileInput = source.result;
   const pdfFile=Buffer.from(file).toString('base64');
-
-  // var pdf = Buffer.from(doc.output(), base64);
-  // var data = new FormData();
-  // data.append('data' , pdf);
-
-  // logger.info(JSON.stringify(doc));
   logger.info(pdfFile);
-
-  // const formData = new FormData();
-  // const fileField = document.querySelector('input[type="file"]');
-  
-  // formData.append('username', 'abc123');
-  // formData.append('avatar', fileField.files[0]);
-  
-  // fetch('https://example.com/profile/avatar', {
-  //   method: 'PUT',
-  //   body: formData
-  // })
-  // .then(response => response.json())
-  // .then(result => {
-  //   console.log('Success:', result);
-  // })
-  // .catch(error => {
-  //   console.error('Error:', error);
-  // });
-  
-
 
   const uow = context.org.dataApi.newUnitOfWork();
 
@@ -80,15 +46,12 @@ module.exports = async function (event, context, logger) {
     type: "ContentVersion",
     fields: {
       ContentLocation: "S",
-      PathOnClient: "RiskReview.pdf",
-      // origin: "H",
+      PathOnClient: title + ".pdf",
       Title: "Risk Review",
       VersionData: pdfFile,
       FirstPublishLocationId: recordId
     }
   });
-
-  logger.info(`AAAAAAAAAAAAAAAAAA`);
 
   try {
       // Commit the Unit of Work with all the previous registered operations
@@ -96,8 +59,6 @@ module.exports = async function (event, context, logger) {
       const result = {
         contentVersionId: response.get(contentVersionId).id,
       }
-
-      logger.info(`BBBBBBBBBBBBBBBBBBBB ` + result.contentVersionId + ` `);
 
       return result;
   } catch (err) {
