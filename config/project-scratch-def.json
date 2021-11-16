@@ -1,7 +1,7 @@
 {
-  "orgName": "jonathan.zhou company",
+  "orgName": "operational risk management",
   "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
+  "features": ["Functions", "EnableSetPasswordInApi"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true

@@ -1,4 +1,4 @@
-sfdx force:org:create -f config/functions-scratch-def.json -a orm -d 30 --setdefaultusername
+sfdx shane:org:create -f config/project-scratch-def.json -d 5 -s --wait 60 --userprefix operational -o risk.mgmt
 sfdx force:source:push
 sfdx automig:load -d ./data
 sfdx shane:user:password:set -p salesforce1 -g User -l User
@@ -15,9 +15,4 @@ sfdx force:org:open
 # sf env create compute -o orm -a docGenCompute
 ## commit functions first
 # sf deploy functions -o orm
-## 
-# 
-
-# Test command, now defunct, update a risk record to under review to trigger flow+apex invocable method
-# echo "GenerateRiskDoc.test('abc', 'sasquatch');" | sfdx force:apex:execute -f /dev/stdin
 # sf env log tail -e docGenCompute
