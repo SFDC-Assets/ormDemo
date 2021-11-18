@@ -12,7 +12,6 @@ public with sharing class GenerateRiskDoc {
             throw new CalloutException( (invocation.getError() != null ? invocation.getError().getMessage(): 'UNKNOWN') );
         }
         String response = invocation.getResponse();
-        System.debug('Response from myfunction ' + response);
         responses.add(response);
         
         return responses;
