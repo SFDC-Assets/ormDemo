@@ -9,14 +9,6 @@
         <value>Apex error</value>
     </labels>
     <labels>
-        <fullName>Timeline_Error_Setup</fullName>
-        <categories>Timeline</categories>
-        <language>en_US</language>
-        <protected>true</protected>
-        <shortDescription>Timeline_Error_Setup</shortDescription>
-        <value>Setup error</value>
-    </labels>
-    <labels>
         <fullName>Timeline_Error_JavaScriptResources</fullName>
         <categories>TImeline</categories>
         <language>en_US</language>
@@ -41,12 +33,20 @@
         <value>Related records show up here on an interactive timeline. Check your filter or create a record.</value>
     </labels>
     <labels>
+        <fullName>Timeline_Error_Setup</fullName>
+        <categories>Timeline</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Timeline_Error_Setup</shortDescription>
+        <value>Setup error</value>
+    </labels>
+    <labels>
         <fullName>Timeline_Error_Unhandled</fullName>
         <categories>Timeline</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Timeline_Error_Unhandled</shortDescription>
-        <value>Houston..we&#39;ve had a problem</value>
+        <value>Houston..we&apos;ve had a problem</value>
     </labels>
     <labels>
         <fullName>Timeline_Label_Apply</fullName>
@@ -134,7 +134,7 @@
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>Timeline_Navigation_Toast_Body</shortDescription>
-        <value>Records of type '{0}' are not supported.</value>
+        <value>Records of type &apos;{0}&apos; are not supported.</value>
     </labels>
     <labels>
         <fullName>Timeline_Navigation_Toast_Header</fullName>
