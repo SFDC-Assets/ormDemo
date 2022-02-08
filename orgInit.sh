@@ -1,3 +1,4 @@
+# sfdx force:org:create -f config/functions-scratch-def.json -d 5
 sfdx shane:org:create -f config/project-scratch-def.json -d 5 -s --wait 60 --userprefix operational -o risk.mgmt
 sfdx force:source:push
 sfdx automig:load -d ./data
