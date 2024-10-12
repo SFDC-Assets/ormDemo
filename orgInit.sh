@@ -1,14 +1,10 @@
-sfdx shane:org:create -f config/project-scratch-def.json -d 5 -s --wait 60 --userprefix operational -o risk.mgmt
-sfdx force:source:push
+sf demoutil org create scratch -p operational -e risk.mgmt -d 5 -w 60 -f config/project-scratch-def.json -s
+sf project deploy start
 sfdx automig:load -d ./data
-sfdx shane:user:password:set -p salesforce1 -g User -l User
-sfdx force:user:permset:assign -n orm_app
-sfdx force:user:permset:assign -n Functions
-sfdx force:user:create -f users/user1.xml
-sfdx force:user:create -f users/user2.xml
-sfdx force:user:create -f users/user3.xml
-sfdx force:org:open
-
+sf demoutil user password set -p salesforce1 -g User -l User
+sf org assign permset -n  orm_app
+sf org assign permset -n  Functions
+sf org open
 ## Login to functions
 # sf login functions
 ## Create functions environment
